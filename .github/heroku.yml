@@ -31,7 +31,7 @@ jobs:
         # Email that you use with heroku
         heroku_email: hugo.vidal.ferre@gmail.com
         # The appname to use for deploying/updating
-        heroku_app_name: ayudante-de-hugovidafe
+        heroku_app_name: ayudante-del-team
         # The branch that you would like to deploy to Heroku
         branch: "master"
       env:

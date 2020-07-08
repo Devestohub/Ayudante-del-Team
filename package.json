@@ -1,5 +1,5 @@
 {
-  "name": "ayudante_del_team",
+  "name": "ayudante-del-team",
   "version": "0.0.10",
   "description": "Ayudante del Team para el servidor de Discord \"Team Server\"",
   "main": "src/index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Hugovidafe/Ayudante_del_Team.git"
+    "url": "git+https://github.com/Hugovidafe/Ayudante-del-Team.git"
   },
   "keywords": [
     "Discord"
@@ -16,9 +16,9 @@
   "author": "Hugo Vidal <Hugo.vidal.ferre@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Hugovidafe/Ayudante_del_Team/issues"
+    "url": "https://github.com/Hugovidafe/Ayudante-del-Team/issues"
   },
-  "homepage": "https://github.com/Hugovidafe/Ayudante_del_Team#readme",
+  "homepage": "https://github.com/Hugovidafe/Ayudante-del-Team#readme",
   "dependencies": {
     "@hugovidafe/useful-api": "^0.6.4",
     "child_process": "^1.0.2",
