@@ -23,7 +23,7 @@ module.exports = {
             const categories = {}
             client.commands.forEach(v => {
                 const perm = v.perm;
-                if (!API.roles.getProfile(API.database.get(roleMember).hasRoles('ayudante.' + perm)) return;
+                if (!API.roles.getProfile(roleMember).hasRoles('ayudante.' + perm)) return;
                 const string = v.name;
                 if (categories[perm]) categories[perm].push(string);
                 else categories[perm] = [string]
