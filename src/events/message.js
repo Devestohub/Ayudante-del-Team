@@ -1,7 +1,7 @@
 // Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
 // Ayudante de Hugovidafe (c) 2020
 // Created: 27/6/2020 12:30:26
-// Modified: 8/7/2020 17:39:34
+// Modified: 8/7/2020 22:34:47
 
 const { Api, version } = require('@hugovidafe/useful-api')
 const { MessageEmbed } = require('discord.js')
@@ -12,6 +12,7 @@ const roles = { applications: { ayudante: [ 'Developer', 'Team', 'User' ] }, pro
 
 module.exports = async (client, message) => {
 	if (message.author.bot || message.author.system) return;
+	const server = client.guilds.cache.get('378284847048818698');
 
 	// API / Databases
 	const API = new Api({ path_langs: `${client.dirname}/database/i18n`, roles: roles, file_db: `${client.dirname}/database/users/${message.author.id}.json` });
@@ -84,7 +85,7 @@ module.exports = async (client, message) => {
 
 	// GET ROLE OF THE MEMBER
 	var roleMember = 'User';
-	if (message.member.roles.cache.has(TeamRole)) roleMember = 'Team';
+	if (server.members.cache.get(message.author.id).roles.cache.has(TeamRole)) roleMember = 'Team';
 	if (message.author.id == client.keys.discord.owner) roleMember = 'Developer';
 
 	if (command.perm) {
