@@ -1,12 +1,16 @@
 // Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
 // Ayudante de Hugovidafe (c) 2020
 // Created: 9/7/2020 1:31:40
-// Modified: 9/7/2020 1:32:20
+// Modified: 9/7/2020 1:48:20
 
 module.exports = {
   name: 'stats',
   perm: 'Team',
   execute(message, embed, { client, args, API, prefixUsed, version }) {
+
+    const server = client.guilds.cache.get('378284847048818698');
+    const stext = server.channels.cache.filter(c => c.type == "text").size
+    const svoice = server.channels.cache.filter(c => c.type == "voice").size
 
     // Number of members on the server
     const cnumber = client.channels.cache.get('497436073052602379')
@@ -38,5 +42,14 @@ module.exports = {
     // Number of roles on the server
     const croles = client.channels.cache.get('510417028738318337')
     croles.edit({ name: `﴿ ROLES: ${server.roles.cache.size} ﴾` })
+
+    return message.channel.send(
+      embed
+        .setColor('#77b255')
+        .setTitle(':white_check_mark: ' + API.langs.__('commands.stats.embed.title'))
+        .setDescription(API.langs.__('commands.stats.embed.description'))
+        .setTimestamp()
+        .setFooter("© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), message.client.user.displayAvatarURL())
+    )
   }
 };
