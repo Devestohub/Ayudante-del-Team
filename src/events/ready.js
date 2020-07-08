@@ -17,8 +17,6 @@ module.exports = async (client) => {
 	// 5 SECONDS
 	setTimeout(function() {
 		client.user.setPresence({ status: 'idle', activity: { name: 'Team Hugo', type: 'WATCHING' } });
-		// Donwloading translations
-		require('download-git-repo')('github:Hugovidafe/Translations#Ayudante-del-Team', 'src/database/i18n', function(err) { console.log(err? "Error downloading translations": "") })
 		// Join "Team Hugo" voice channel
 		client.channels.cache.get('586618451431260163').join();
 	}, 5000)

@@ -118,7 +118,7 @@ module.exports = async (client, message) => {
 
 	try {
 		command.execute(message, new MessageEmbed(), {
-			client, args, API, prefixUsed, version
+			client, args, API, prefixUsed, roleMember, version
 		});
 	} catch (error) {
 		console.error(error);

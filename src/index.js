@@ -23,15 +23,14 @@ app.get('/folders/*', (req, res) => {
 })
 
 
+require('download-git-repo')('github:Hugovidafe/Translations#Ayudante-del-Team', 'src/database/i18n', function(err) { console.log(err? "Error downloading translations": "") })
+
+
 const client = new Client();
 client.commands = new Collection();
 client.config = require('./database/config.json')
 client.keys = require('./keys');
 client.dirname = __dirname;
-
-new Collection().filter(v => {
-    v.perm == "User"
-}).array().join(", ")
 
 const commandFiles = fs.readdirSync(__dirname + '/commands').filter(file => file.endsWith('.js') && !file.startsWith('.'));
 
