@@ -1,7 +1,7 @@
 // Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
 // Ayudante de Hugovidafe (c) 2020
 // Created: 27/6/2020 12:30:26
-// Modified: 8/7/2020 17:9:20
+// Modified: 8/7/2020 17:25:16
 
 const { Api, version } = require('@hugovidafe/useful-api')
 const { MessageEmbed } = require('discord.js')
@@ -84,8 +84,8 @@ module.exports = async (client, message) => {
 
 	// GET ROLE OF THE MEMBER
 	var roleMember = "User";
-	if (message.author.id == client.keys.owner) roleMember = "Developer";
 	if (message.member.roles.cache.has(TeamRole)) roleMember = "Team";
+	if (message.author.id == client.keys.owner) roleMember = "Developer";
 
 	if (command.perm) {
 		if (!API.roles.getProfile(roleMember).hasRoles('ayudante.' + command.perm) ) return message.channel.send(new MessageEmbed()
