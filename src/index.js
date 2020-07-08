@@ -30,7 +30,7 @@ client.keys = require('./keys');
 client.dirname = __dirname;
 
 new Collection().filter(v => {
-    v.perms == "User"
+    v.perm == "User"
 }).array().join(", ")
 
 const commandFiles = fs.readdirSync(__dirname + '/commands').filter(file => file.endsWith('.js') && !file.startsWith('.'));

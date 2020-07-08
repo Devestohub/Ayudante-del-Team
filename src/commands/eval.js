@@ -9,7 +9,7 @@ module.exports = {
     name: 'eval',
     args: true,
     usage: '[...toEval]',
-	perms: 'Developer',
+	perm: 'Developer',
 	execute(message, embed, { client, args, API, prefixUsed, version }) {
         function clean(text) {
             if (typeof(text) === "string") return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));

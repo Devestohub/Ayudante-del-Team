@@ -8,7 +8,7 @@ module.exports = {
     description: 'Lista de todos mis comandos o la información de un comando',
 	aliases: ['comandos'],
 	usage: '[nombre del comando]',
-	perms: 'User',
+	perm: 'User',
     execute(message, embed, { client, args, API, prefixUsed, version }) {
         if (!args.length) {
             const emb = {
@@ -22,7 +22,7 @@ module.exports = {
 
             const categories = {}
             client.commands.forEach(v => {
-                const perm = v.perms;
+                const perm = v.perm;
                 if (!API.roles.getProfile(API.database.get('config.rol')).hasRoles('ayudante.' + perm)) return;
                 const string = v.name;
                 if (categories[perm]) categories[perm].push(string);
@@ -66,7 +66,7 @@ module.exports = {
         if (command.aliases) info.push(`- ` + API.langs.__('commands.help.embedCommand.fields.aliases') + `\n+ ${command.aliases.join(', ')} `);
         if (command.description) info.push(`- ` + API.langs.__('commands.help.embedCommand.fields.description') + `\n+ ${API.langs.__('commands.' + command.name + '.description')} `);
 		if (command.usage) info.push(`- ` + API.langs.__('commands.help.embedCommand.fields.usage') + `\n+ ${command.name} ${command.usage} `);
-		if (command.perms) info.push(`- ` + API.langs.__('commands.help.embedCommand.fields.permissions') + `\n+ ${API.langs.__('users.roles.' + command.perms + ".one")} `)
+		if (command.perm) info.push(`- ` + API.langs.__('commands.help.embedCommand.fields.permissions') + `\n+ ${API.langs.__('users.roles.' + command.perm + ".one")} `)
 
         message.channel.send(embed
             .setColor('#7289da')

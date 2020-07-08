@@ -7,7 +7,7 @@ module.exports = {
 	name: 'reload',
 	aliases: ['restart'],
 	usage: '[comando]',
-	perms: 'Developer',
+	perm: 'Developer',
 	async execute(message, embed, { client, args, API, prefixUsed, version }) {
 		if (!args.length) {
 			await message.client.users.cache.get('324449297951096834').send(embed
