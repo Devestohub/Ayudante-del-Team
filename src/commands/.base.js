@@ -4,11 +4,11 @@
 // Modified: 24/6/2020 11:27:6
 
 module.exports = {
-    name: '?',
-    args: true,
-    usage: '[args]',
-	perm: "api.?",
-	execute(message, embed, { client, args, API, prefixUsed, version }) {
-
-    }
+  name: '?',
+  args: true,
+  usage: '[args]',
+  perm: "?",
+  execute(message, embed, { client, args, API, prefixUsed, version }) {
+    
+  }
 };
