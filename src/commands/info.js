@@ -1,7 +1,7 @@
 // Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
 // Ayudante de Hugovidafe (c) 2020
 // Created: 28/6/2020 12:9:44
-// Modified: 8/7/2020 13:15:52
+// Modified: 8/7/2020 17:31:47
 
 const moment = require("moment");
 require("moment-duration-format");
@@ -14,7 +14,7 @@ function readVersion(err, stdout) {
 
 module.exports = {
 	name: 'info',
-	aliases: ['information', 'información', 'stats'],
+	aliases: ['information', 'información', 'stats', 'i'],
 	perm: 'User',
 	execute(message, embed, { client, args, API, prefixUsed, version }) {
         // console.log(version);

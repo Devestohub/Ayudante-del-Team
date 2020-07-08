@@ -1,12 +1,12 @@
 // Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
 // Ayudante de Hugovidafe (c) 2020
 // Created: 27/6/2020 12:30:3
-// Modified: 5/7/2020 1:53:2
+// Modified: 8/7/2020 17:34:41
 
 module.exports = {
 	name: 'help',
     description: 'Lista de todos mis comandos o la información de un comando',
-	aliases: ['comandos'],
+	aliases: ['comandos', 'h'],
 	usage: '[nombre del comando]',
 	perm: 'User',
     execute(message, embed, { client, args, API, prefixUsed, version }) {
