@@ -9,7 +9,7 @@ module.exports = {
 	aliases: ['comandos', 'h'],
 	usage: '[nombre del comando]',
 	perm: 'User',
-    execute(message, embed, { client, args, API, prefixUsed, version }) {
+    execute(message, embed, { client, args, API, prefixUsed, roleMember, version }) {
         if (!args.length) {
             const emb = {
                 color: 0x7289da,
@@ -23,7 +23,7 @@ module.exports = {
             const categories = {}
             client.commands.forEach(v => {
                 const perm = v.perm;
-                if (!API.roles.getProfile(API.database.get('config.rol')).hasRoles('ayudante.' + perm)) return;
+                if (!API.roles.getProfile(API.database.get(roleMember).hasRoles('ayudante.' + perm)) return;
                 const string = v.name;
                 if (categories[perm]) categories[perm].push(string);
                 else categories[perm] = [string]
