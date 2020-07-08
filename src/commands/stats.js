@@ -1,7 +1,10 @@
 // Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
 // Ayudante de Hugovidafe (c) 2020
 // Created: 9/7/2020 1:31:40
-// Modified: 9/7/2020 1:48:20
+// Modified: 9/7/2020 1:55:20
+
+const moment = require("moment");
+require("moment-duration-format");
 
 module.exports = {
   name: 'stats',
