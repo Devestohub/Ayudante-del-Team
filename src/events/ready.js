@@ -56,7 +56,8 @@ module.exports = async (client) => {
 	// 12 HORAS
 	setInterval(function() {
 		// Donwloading translations
-		require('download-git-repo')('github:Hugovidafe/Translations#Ayudante-del-Team', 'src/database/i18n', function(err) { console.log(err? "Error downloading translations": "") })// Days that the server has been created
+		require('download-git-repo')('github:Hugovidafe/Translations#Ayudante-del-Team', 'src/database/i18n', function(err) { console.log(err? "Error downloading translations": "") })
+		// Days that the server has been created
 		const cdays = client.channels.cache.get('496300809030467584');
 		const days = new Date().getTime() - server.createdTimestamp;
 		cdays.edit({ name: `〙Desde ${moment.duration(days, "milliseconds").format(`d`)} días` })
