@@ -1,7 +1,7 @@
 // Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
 // Ayudante de Hugovidafe (c) 2020
 // Created: 27/6/2020 12:30:11
-// Modified: 8/7/2020 17:37:41
+// Modified: 8/7/2020 17:45:25
 
 module.exports = {
 	name: 'reload',
@@ -20,18 +20,18 @@ module.exports = {
 			return process.exit(1);
 		}
 
-		const commandName = args[0].toLowerCase();
-
-		if (commandName == "locale") {
-			require('download-git-repo')('github:Hugovidafe/Translations#Ayudante-del-Team', 'src/database/i18n', function(err) {
-				return embed
+		if (args[0].toLowerCase() == 'locale') {
+			return require('download-git-repo')('github:Hugovidafe/Translations#Ayudante-del-Team', 'src/database/i18n', function(err) {
+				message.channel.send(embed
 					.setColor(err? '#be1931': '#77b255')
 					.setTitle(err? ':exclamation: ' + API.langs.__('commands.reload.embedLocale.fail'): ':white_check_mark: ' + API.langs.__('commands.reload.embedLocale.success'))
 					.setTimestamp()
 					.setFooter("© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), message.client.user.displayAvatarURL())
+				)
 			})
 		}
 
+		const commandName = args[0].toLowerCase();
 		const command = message.client.commands.get(commandName) || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 		if (!command) {
