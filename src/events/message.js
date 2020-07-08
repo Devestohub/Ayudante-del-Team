@@ -1,7 +1,7 @@
 // Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
 // Ayudante de Hugovidafe (c) 2020
 // Created: 27/6/2020 12:30:26
-// Modified: 8/7/2020 17:2:55
+// Modified: 8/7/2020 17:9:20
 
 const { Api, version } = require('@hugovidafe/useful-api')
 const { MessageEmbed } = require('discord.js')
@@ -88,7 +88,7 @@ module.exports = async (client, message) => {
 	if (message.member.roles.cache.has(TeamRole)) roleMember = "Team";
 
 	if (command.perm) {
-		if (!API.roles.getProfile(roleMember).hasRoles('ayudante' + command.perm) ) return message.channel.send(new MessageEmbed()
+		if (!API.roles.getProfile(roleMember).hasRoles('ayudante.' + command.perm) ) return message.channel.send(new MessageEmbed()
 			.setColor('#be1931')
 			.setTitle(':exclamation: ' + API.langs.__('onMessage.noPerms.title', command.name))
 			.setDescription(API.langs.__('onMessage.noPerms.description', { userPerm: API.langs.__('users.roles.' + roleMember + '.one'), commandPerm: API.langs.__('users.roles.' + command.perm + '.one') }))
