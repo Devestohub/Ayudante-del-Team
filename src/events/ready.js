@@ -60,9 +60,9 @@ module.exports = async (client) => {
 		// Days that the server has been created
 		const cdays = client.channels.cache.get('496300809030467584');
 		const days = new Date().getTime() - server.createdTimestamp;
-		cdays.edit({name: `〙Desde ${moment.duration(days, "milliseconds").format(`d`)} días`})
+		cdays.edit({ name: `〙Desde ${moment.duration(days, "milliseconds").format(`d`)} días` })
 		// Number of roles on the server
 		const croles = client.channels.cache.get('510417028738318337')
-		croles.edit({name: `﴿ ROLES: ${server.roles.cache.size} ﴾`})
+		croles.edit({ name: `﴿ ROLES: ${server.roles.cache.size} ﴾` })
 	}, 43200000)
-}
+};
