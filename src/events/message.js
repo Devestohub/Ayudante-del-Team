@@ -1,12 +1,12 @@
 // Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
 // Ayudante de Hugovidafe (c) 2020
 // Created: 27/6/2020 12:30:26
-// Modified: 8/7/2020 13:50:43
+// Modified: 8/7/2020 17:2:55
 
 const { Api, version } = require('@hugovidafe/useful-api')
 const { MessageEmbed } = require('discord.js')
 const ISO6391 = require('iso-639-1');
-const { prefix } = require('../database/config.json')
+const { prefix, TeamRole } = require('../database/config.json')
 
 const roles = { applications: { ayudante: [ 'Developer', 'Team', 'User' ] }, profiles: { Developer: [ 'ayudante.*' ], Team: [ 'ayudante.Team', 'ayudante.User' ], User: [ 'ayudante.User' ] } }
 
@@ -15,13 +15,13 @@ module.exports = async (client, message) => {
 
 	// API / Databases
 	const API = new Api({ path_langs: `${client.dirname}/database/i18n`, roles: roles, file_db: `${client.dirname}/database/users/${message.author.id}.json` });
-
+	API.database.set('discord', message.author)
 
 	// Prefixes
 	const userPrefix = API.database.has('config.prefix')? API.database.get('config.prefix'): API.database.set('config.prefix', prefix);
 	const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	const mentionRegex = new RegExp(`^(<@!?${client.user.id}>)\\s*`)
-	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(userPrefix)})\\s*`);
+	const prefixRegex = userPrefix? new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(userPrefix)})\\s*`): new RegExp(`^(<@!?${client.user.id}>)\\s*`);
 	var args = "";
 	var prefixUsed = "";
 	if (message.channel.type == "dm" && !prefixRegex.test(message.content)) {
@@ -51,8 +51,6 @@ module.exports = async (client, message) => {
 	const commandName = args.shift().toLowerCase();
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-	API.database.set('discord', message.author)
-	if (!API.database.get('config.rol')) API.database.set('config.rol', 'User')
 	if (!API.database.get('config.lang')) API.database.set('config.rol', 'es')
 
 	// if (!API.database.get('config.lang') && (!message.content.includes("user config lang") && !message.content.includes("eval"))) return message.channel.send(new MessageEmbed()
@@ -64,9 +62,7 @@ module.exports = async (client, message) => {
 	// )
 
 	if (API.database.get('config.lang')) {
-
 		API.langs.setLocale(API.database.get('config.lang'));
-
 		message.channel.send(new MessageEmbed()
 			.setColor('#be1931')
 			.setTitle(':exclamation: ' + API.langs.__('onMessage.inDeveloping.title', client.user.username))
@@ -86,12 +82,16 @@ module.exports = async (client, message) => {
 		.setFooter("© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), message.client.user.displayAvatarURL())
 	)
 
-	if (command.perms) {
-		const rolPerson = API.database.get('config.rol');
-		if (!API.roles.getProfile(rolPerson).hasRoles('ayudante.' + command.perms)) return message.channel.send(new MessageEmbed()
+	// GET ROLE OF THE MEMBER
+	var roleMember = "User";
+	if (message.author.id == client.keys.owner) roleMember = "Developer";
+	if (message.member.roles.cache.has(TeamRole)) roleMember = "Team";
+
+	if (command.perm) {
+		if (!API.roles.getProfile(roleMember).hasRoles('ayudante' + command.perm) ) return message.channel.send(new MessageEmbed()
 			.setColor('#be1931')
 			.setTitle(':exclamation: ' + API.langs.__('onMessage.noPerms.title', command.name))
-			.setDescription(API.langs.__('onMessage.noPerms.description', { userPerm: API.langs.__('users.roles.' + rolPerson + '.one'), commandPerm: API.langs.__('users.roles.' + command.perms + '.one') }))
+			.setDescription(API.langs.__('onMessage.noPerms.description', { userPerm: API.langs.__('users.roles.' + roleMember + '.one'), commandPerm: API.langs.__('users.roles.' + command.perm + '.one') }))
 			.setTimestamp()
 			.setFooter("© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), message.client.user.displayAvatarURL())
 		);

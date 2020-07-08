@@ -15,7 +15,7 @@ function readVersion(err, stdout) {
 module.exports = {
 	name: 'info',
 	aliases: ['information', 'información', 'stats'],
-	perms: 'User',
+	perm: 'User',
 	execute(message, embed, { client, args, API, prefixUsed, version }) {
         // console.log(version);
         moment.updateLocale('en', {

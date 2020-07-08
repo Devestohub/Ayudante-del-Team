@@ -7,7 +7,7 @@ module.exports = {
     name: '?',
     args: true,
     usage: '[args]',
-	perms: "api.?",
+	perm: "api.?",
 	execute(message, embed, { client, args, API, prefixUsed, version }) {
 
     }
