@@ -1,7 +1,7 @@
 // Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
 // Ayudante de Hugovidafe (c) 2020
 // Created: 27/6/2020 12:30:3
-// Modified: 9/7/2020 14:27:12
+// Modified: 9/7/2020 14:38:30
 
 module.exports = {
   name: 'help',
@@ -42,7 +42,7 @@ module.exports = {
       })
       emb.fields.push({
         name: '\u200B',
-        value: API.langs.__('commands.help.embed.fields.allCommands', { prefix: prefixUsed })
+        value: API.langs.__('commands.help.embed.fields.helpCommand', { prefix: prefixUsed })
       })
       if (prefixUsed) emb.description = API.langs.__('commands.help.embed.description') + "\n" + API.langs.__('commands.help.embed.descPrefix', { prefix: prefixUsed });
       return message.channel.send({ embed: emb })
