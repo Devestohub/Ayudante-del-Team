@@ -1,7 +1,7 @@
 // Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
 // Ayudante de Hugovidafe (c) 2020
 // Created: 27/6/2020 12:30:3
-// Modified: 9/7/2020 10:55:5
+// Modified: 9/7/2020 14:27:12
 
 module.exports = {
   name: 'help',
@@ -42,9 +42,9 @@ module.exports = {
       })
       emb.fields.push({
         name: '\u200B',
-        value: API.langs.__('commands.help.embed.fields.allCommands', { help: prefixUsed })
+        value: API.langs.__('commands.help.embed.fields.allCommands', { prefix: prefixUsed })
       })
-      if (prefixUsed) emb.description = API.langs.__('commands.help.embed.description') + "\n" + API.langs.__('commands.help.embed.description.prefix', prefixUsed);
+      if (prefixUsed) emb.description = API.langs.__('commands.help.embed.description') + "\n" + API.langs.__('commands.help.embed.descPrefix', { prefix: prefixUsed });
       return message.channel.send({ embed: emb })
     }
 
@@ -55,7 +55,7 @@ module.exports = {
       return message.channel.send(embed
         .setColor('#be1931')
         .setTitle(':exclamation: ' + API.langs.__('onMessage.noCommand'))
-        .setDescription('**' + API.langs.__('commands.help.embed.fields.allCommands', { help: prefixUsed }) + '**')
+        .setDescription('**' + API.langs.__('commands.help.embed.fields.allCommands', { prefix: prefixUsed }) + '**')
         .setTimestamp()
         .setFooter("© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), message.client.user.displayAvatarURL())
       )
@@ -72,7 +72,7 @@ module.exports = {
       .setColor('#7289da')
       .setTitle(':page_with_curl: ' + API.langs.__('commands.help.embedCommand.title'))
       .setDescription(`**${API.langs.__('commands.help.embedCommand.description', `\`${command.name}\``)}**\n` + '```diff\n' + info.join('\n\n') + '```')
-      .addField('\u200B', '**' + API.langs.__('commands.help.embed.fields.allCommands', { help: prefixUsed }) + '**')
+      .addField('\u200B', '**' + API.langs.__('commands.help.embed.fields.allCommands', { prefix: prefixUsed }) + '**')
       .setTimestamp()
       .setFooter("© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), message.client.user.displayAvatarURL())
     )
