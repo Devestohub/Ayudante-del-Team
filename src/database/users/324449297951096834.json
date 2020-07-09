@@ -1,18 +1,4 @@
 {
-  "discord": {
-    "id": "324449297951096834",
-    "bot": false,
-    "username": "Hugovidafe",
-    "discriminator": "2728",
-    "avatar": "9ada40a9d241d899868d418608b0e1b3",
-    "flags": 256,
-    "lastMessageChannelID": "492377328790536192",
-    "createdTimestamp": 1497425140608,
-    "defaultAvatarURL": "https://cdn.discordapp.com/embed/avatars/3.png",
-    "tag": "Hugovidafe#2728",
-    "avatarURL": "https://cdn.discordapp.com/avatars/324449297951096834/9ada40a9d241d899868d418608b0e1b3.webp",
-    "displayAvatarURL": "https://cdn.discordapp.com/avatars/324449297951096834/9ada40a9d241d899868d418608b0e1b3.webp"
-  },
   "config": {
     "prefix": "1.",
     "lang": "es"
