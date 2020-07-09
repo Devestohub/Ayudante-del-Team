@@ -38,7 +38,7 @@ module.exports = {
       return message.channel.send(embed
         .setColor('#be1931')
         .setTitle(':exclamation: ' + API.langs.__('onMessage.noCommand'))
-        .setDescription('**' + API.langs.__('commands.help.embed.fields.allCommands', { help: prefixUsed }) + '**')
+        .setDescription('**' + API.langs.__('commands.help.embed.fields.allCommands', { prefix: prefixUsed }) + '**')
         .setTimestamp()
         .setFooter("© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), message.client.user.displayAvatarURL())
       )
