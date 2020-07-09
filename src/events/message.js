@@ -1,7 +1,7 @@
 // Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
 // Ayudante de Hugovidafe (c) 2020
 // Created: 27/6/2020 12:30:26
-// Modified: 9/7/2020 14:14:49
+// Modified: 9/7/2020 19:31:12
 
 const { Api, version } = require('@hugovidafe/useful-api')
 const { MessageEmbed } = require('discord.js')
@@ -15,28 +15,26 @@ module.exports = async (client, message) => {
   const server = client.guilds.cache.get('378284847048818698');
 
   // API / Databases
-  const API = new Api({ path_langs: `${client.dirname}/database/i18n`, roles: roles, file_db: `${client.dirname}/database/users/${message.author.id}.json` });
+  const API = new Api({ path_langs: `${client.dirname}/database/i18n`, roles: roles });
 
   if (
-    client.user.id !== client.keys.discord.original &&
+    client.user.id !== (client.keys.discord.bots[0] || client.keys.discord.bots[1]) &&
     message.guild != null &&
     !new RegExp(`^<@!?${client.user.id}>`).test(message.content)
   ) {
-    const bot = message.channel.members.has(client.keys.discord.original)
+    const bot = message.channel.members.has(client.keys.discord.bots[0]) || message.channel.members.has(client.keys.discord.bots[1])
     if (bot) return;
   }
 
   // Prefixes
-  const userPrefix = API.database.has('config.prefix')? API.database.get('config.prefix'): API.database.set('config.prefix', prefix);
   const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const mentionRegex = new RegExp(`^(<@!?${client.user.id}>)\\s*`)
-  const prefixRegex = userPrefix? new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(userPrefix)})\\s*`): new RegExp(`^(<@!?${client.user.id}>)\\s*`);
+  const prefixRegex = prefix? new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`): mentionRegex;
   var args = "";
   var prefixUsed = "";
   if (message.channel.type == "dm" && !prefixRegex.test(message.content)) {
     args = message.content.split(/ +/);
   } else if (prefixRegex.test(message.content)) {
-
     const [, matchedPrefix] = message.content.match(prefixRegex);
     args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
     prefixUsed = mentionRegex.test(matchedPrefix)? matchedPrefix + " ": matchedPrefix;
@@ -61,28 +59,16 @@ module.exports = async (client, message) => {
   const commandName = args.shift().toLowerCase();
   const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-  if (!API.database.get('config.lang')) API.database.set('config.rol', 'es')
-
-  // if (!API.database.get('config.lang') && (!message.content.includes("user config lang") && !message.content.includes("eval"))) return message.channel.send(new MessageEmbed()
-  // 	.setColor('#be1931')
-  // 	.setTitle(':exclamation: ' + API.langs.__l('onMessage.noLang.title').join("\n:exclamation: "))
-  // 	.setDescription('```md\n# ' + API.langs.__l('onMessage.noLang.description').join("\n# ") + '\n\n' + lang + '```')
-  // 	.setTimestamp()
-  // 	.setFooter("© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), message.client.user.displayAvatarURL())
-  // )
-
-  if (API.database.get('config.lang')) {
-    API.langs.setLocale(API.database.get('config.lang'));
-    message.channel.send(new MessageEmbed()
-      .setColor('#be1931')
-      .setTitle(':exclamation: ' + API.langs.__('onMessage.inDeveloping.title', client.user.username))
-      .setDescription(API.langs.__('onMessage.inDeveloping.description'))
-      .setTimestamp()
-      .setFooter("© " + new Date().getFullYear() + " " + client.user.username, client.user.displayAvatarURL())
-    ).then(message => setTimeout(function() {
-      message.delete()
-    }, 8000))
-  }
+  API.langs.setLocale('es');
+  message.channel.send(new MessageEmbed()
+    .setColor('#be1931')
+    .setTitle(':exclamation: ' + API.langs.__('onMessage.inDeveloping.title', client.user.username))
+    .setDescription(API.langs.__('onMessage.inDeveloping.description'))
+    .setTimestamp()
+    .setFooter("© " + new Date().getFullYear() + " " + client.user.username, client.user.displayAvatarURL())
+  ).then(message => setTimeout(function() {
+    message.delete()
+  }, 8000))
 
   if (!command) return message.channel.send(new MessageEmbed()
     .setColor('#be1931')
