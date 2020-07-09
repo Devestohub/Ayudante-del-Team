@@ -18,7 +18,7 @@ module.exports = async (client, message) => {
 	const API = new Api({ path_langs: `${client.dirname}/database/i18n`, roles: roles, file_db: `${client.dirname}/database/users/${message.author.id}.json` });
 	API.database.set('discord', message.author)
 
-  if (!message.channel.type == 'dm' && message.channel.members.cache.has(client.keys.discord.original) && client.user.id != client.keys.discord.original) return;
+  if (message.channel.type != 'dm' && message.channel.members.cache.has(client.keys.discord.original) && client.user.id != client.keys.discord.original) return;
 
 	// Prefixes
 	const userPrefix = API.database.has('config.prefix')? API.database.get('config.prefix'): API.database.set('config.prefix', prefix);
