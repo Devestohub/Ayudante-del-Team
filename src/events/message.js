@@ -1,7 +1,7 @@
 // Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
 // Ayudante de Hugovidafe (c) 2020
 // Created: 27/6/2020 12:30:26
-// Modified: 9/7/2020 14:50:51
+// Modified: 9/7/2020 19:18:9
 
 const { Api, version } = require('@hugovidafe/useful-api')
 const { MessageEmbed } = require('discord.js')
@@ -18,11 +18,11 @@ module.exports = async (client, message) => {
   const API = new Api({ path_langs: `${client.dirname}/database/i18n`, roles: roles, file_db: `${client.dirname}/database/users/${message.author.id}.json` });
 
   if (
-    client.user.id !== (client.keys.discord.original || client.keys.discord.beta) &&
+    client.user.id !== (client.keys.discord.bots[0] || client.keys.discord.bots[1]) &&
     message.guild != null &&
     !new RegExp(`^<@!?${client.user.id}>`).test(message.content)
   ) {
-    const bot = message.channel.members.has(client.keys.discord.original) || message.channel.members.has(client.keys.discord.beta)
+    const bot = message.channel.members.has(client.keys.discord.bots[0]) || message.channel.members.has(client.keys.discord.bots[1])
     if (bot) return;
   }
 
