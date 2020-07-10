@@ -80,7 +80,7 @@ module.exports = async (client, message) => {
   // GET ROLE OF THE MEMBER
   var roleMember = 'User';
   if (server.members.cache.get(message.author.id).roles.cache.has(client.config.TeamRole)) roleMember = 'Team';
-  if (message.author.id == client.keys.discord.owner) roleMember = 'Developer';
+  if (message.author.id == client.config.owner) roleMember = 'Developer';
 
   if (command.perm) {
     if (!API.roles.getProfile(roleMember).hasRoles('ayudante.' + command.perm) ) return message.channel.send(new MessageEmbed()
