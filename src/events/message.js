@@ -6,7 +6,6 @@
 const { Api, version } = require('@hugovidafe/useful-api')
 const { MessageEmbed } = require('discord.js')
 const ISO6391 = require('iso-639-1');
-const { prefix, TeamRole } = require('../database/config.json')
 
 const roles = { applications: { ayudante: [ 'Developer', 'Team', 'User' ] }, profiles: { Developer: [ 'ayudante.*' ], Team: [ 'ayudante.Team', 'ayudante.User' ], User: [ 'ayudante.User' ] } }
 
@@ -22,14 +21,14 @@ module.exports = async (client, message) => {
     message.guild != null &&
     !new RegExp(`^<@!?${client.user.id}>`).test(message.content)
   ) {
-    const bot = message.channel.members.has(originalID) || message.channel.members.has(betaID)
+    const bot = message.channel.members.has(client.config.original.id) || message.channel.members.has(client.config.beta.id)
     if (bot) return;
   }
 
   // Prefixes
   const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const mentionRegex = new RegExp(`^(<@!?${client.user.id}>)\\s*`)
-  const prefixRegex = prefix? new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`): mentionRegex;
+  const prefixRegex = prefix? new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(client.config + "." + client.env + "." + prefix)})\\s*`): mentionRegex;
   var args = "";
   var prefixUsed = "";
   if (message.channel.type == "dm" && !prefixRegex.test(message.content)) {
