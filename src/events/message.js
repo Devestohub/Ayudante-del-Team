@@ -14,7 +14,7 @@ module.exports = async (client, message) => {
   const server = client.guilds.cache.get('378284847048818698');
 
   // API / Databases
-  const API = new Api({ path_langs: `${client.dirname}/database/i18n/${client.env}`, roles: roles });
+  const API = new Api({ path_langs: `${client.dirname}/database/i18n/* /${client.env} */`, roles: roles });
 
   if (
     client.env != 'original' &&
@@ -40,7 +40,7 @@ module.exports = async (client, message) => {
   } else return;
 
   // LANGS
-  const i18n = require('fs').readdirSync(`${client.dirname}/database/i18n/${client.env}`).filter(file => file.endsWith('.json') && !file.startsWith('.'))
+  const i18n = require('fs').readdirSync(`${client.dirname}/database/i18n /* /${client.env} */`).filter(file => file.endsWith('.json') && !file.startsWith('.'))
   const lang = i18n.map(lang => {
     const Langs = lang.substring(0, lang.lastIndexOf('.'));
     return '<' + ISO6391.getNativeName(Langs) + '/' + ISO6391.getName(Langs) + '/' + Langs + `>\n> ${prefixUsed}user config lang ` + Langs;
