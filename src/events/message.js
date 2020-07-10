@@ -11,7 +11,7 @@ const roles = { applications: { ayudante: [ 'Developer', 'Team', 'User' ] }, pro
 
 module.exports = async (client, message) => {
   if (message.author.bot || message.author.system) return;
-  const server = client.guilds.cache.get('378284847048818698');
+  const server = client.guilds.cache.get(client.config.guild);
 
   // API / Databases
   const API = new Api({ path_langs: `${client.dirname}/database/i18n`, roles: roles });
@@ -19,6 +19,7 @@ module.exports = async (client, message) => {
   if (
     client.env != 'original' &&
     message.guild != null &&
+    client.config + `.${client.env}.prefix` != client.config.original.prefix &&
     !new RegExp(`^<@!?${client.user.id}>`).test(message.content)
   ) {
     const bot = message.channel.members.has(client.config.original.id) || message.channel.members.has(client.config.beta.id)

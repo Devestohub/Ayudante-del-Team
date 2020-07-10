@@ -21,7 +21,7 @@ module.exports = async (client) => {
   console.log(`${client.env} ${client.user.tag} / ${client.user.id}`);
   client.user.setPresence({ status: 'dnd', activity: {name: 'iniciarse...', type: 'PLAYING' }});
 
-  const server = client.guilds.cache.get('378284847048818698');
+  const server = client.guilds.cache.get(client.config.guild);
   const stext = server.channels.cache.filter(c => c.type == "text").size
   const svoice = server.channels.cache.filter(c => c.type == "voice").size
 
