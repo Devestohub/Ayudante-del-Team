@@ -6,7 +6,6 @@
 const { Api, version } = require('@hugovidafe/useful-api')
 const { MessageEmbed } = require('discord.js')
 const ISO6391 = require('iso-639-1');
-const { prefix, TeamRole } = require('../database/config.json')
 
 const roles = { applications: { ayudante: [ 'Developer', 'Team', 'User' ] }, profiles: { Developer: [ 'ayudante.*' ], Team: [ 'ayudante.Team', 'ayudante.User' ], User: [ 'ayudante.User' ] } }
 
@@ -15,21 +14,21 @@ module.exports = async (client, message) => {
   const server = client.guilds.cache.get('378284847048818698');
 
   // API / Databases
-  const API = new Api({ path_langs: `${client.dirname}/database/i18n`, roles: roles });
+  const API = new Api({ path_langs: `${client.dirname}/database/i18n/* /${client.env} */`, roles: roles });
 
   if (
-    client.user.id !== (client.keys.discord.bots[0] || client.keys.discord.bots[1]) &&
+    client.env != 'original' &&
     message.guild != null &&
     !new RegExp(`^<@!?${client.user.id}>`).test(message.content)
   ) {
-    const bot = message.channel.members.has(client.keys.discord.bots[0]) || message.channel.members.has(client.keys.discord.bots[1])
+    const bot = message.channel.members.has(client.config.original.id) || message.channel.members.has(client.config.beta.id)
     if (bot) return;
   }
 
   // Prefixes
   const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const mentionRegex = new RegExp(`^(<@!?${client.user.id}>)\\s*`)
-  const prefixRegex = prefix? new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`): mentionRegex;
+  const prefixRegex = prefix? new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(client.config + "." + client.env + "." + prefix)})\\s*`): mentionRegex;
   var args = "";
   var prefixUsed = "";
   if (message.channel.type == "dm" && !prefixRegex.test(message.content)) {
@@ -41,7 +40,7 @@ module.exports = async (client, message) => {
   } else return;
 
   // LANGS
-  const i18n = require('fs').readdirSync(`${client.dirname}/database/i18n`).filter(file => file.endsWith('.json') && !file.startsWith('.'))
+  const i18n = require('fs').readdirSync(`${client.dirname}/database/i18n /* /${client.env} */`).filter(file => file.endsWith('.json') && !file.startsWith('.'))
   const lang = i18n.map(lang => {
     const Langs = lang.substring(0, lang.lastIndexOf('.'));
     return '<' + ISO6391.getNativeName(Langs) + '/' + ISO6391.getName(Langs) + '/' + Langs + `>\n> ${prefixUsed}user config lang ` + Langs;

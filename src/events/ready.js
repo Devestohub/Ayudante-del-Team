@@ -7,7 +7,18 @@ const moment = require("moment");
 require("moment-duration-format");
 
 module.exports = async (client) => {
-  console.log(`${client.user.tag} / ${client.user.id}`);
+  switch (client.user.id) {
+    case client.config.original.id:
+      client.env = "original";
+      break;
+    case client.config.beta.id:
+      client.env = "beta";
+      break;
+    default:
+      client.env = "alpha";
+      break;
+  }
+  console.log(`${client.env} ${client.user.tag} / ${client.user.id}`);
   client.user.setPresence({ status: 'dnd', activity: {name: 'iniciarse...', type: 'PLAYING' }});
 
   const server = client.guilds.cache.get('378284847048818698');
@@ -23,7 +34,7 @@ module.exports = async (client) => {
 
   // 5 SECONDS
   setInterval(function() {
-    if (server.members.cache.has(client.keys.discord.original) && server.members.cache.get(client.keys.discord.original).presence.status != "offline" && client.user.id != client.keys.discord.original) return;
+    if (client.env != "original") return;
     // Number of members on the server
     const cnumber = client.channels.cache.get('497436073052602379')
     cnumber.edit({name: `﴿ MIEMBROS: ${server.memberCount} ﴾`})
@@ -40,7 +51,7 @@ module.exports = async (client) => {
 
   // 10 MINUTES
   setInterval(function() {
-    if (server.members.cache.has(client.keys.discord.original) && server.members.cache.get(client.keys.discord.original).presence.status != "offline" && client.user.id != client.keys.discord.original) return;
+    if (client.env != "original") return;
     // Correctly establish roles
     const roles = ['727444149980364851', '727443564795265085', '720572925198991432', '720574206978293811']
     server.members.cache.filter(m => !m.user.bot).forEach(member => roles.forEach(rs => member.roles.add(server.roles.cache.find(r => r.id == rs))))
@@ -59,7 +70,7 @@ module.exports = async (client) => {
   setInterval(function() {
     // Donwloading translations
     require('download-git-repo')('github:Hugovidafe/Translations#Ayudante-del-Team', 'src/database/i18n', function(err) { console.log(err? "Error downloading translations": "") })
-    if (server.members.cache.has(client.keys.discord.original) && server.members.cache.get(client.keys.discord.original).presence.status != "offline" && client.user.id != client.keys.discord.original) return;
+    if (client.env != "original") return;
     // Days that the server has been created
     const cdays = client.channels.cache.get('496300809030467584');
     const days = new Date().getTime() - server.createdTimestamp;
