@@ -6,30 +6,30 @@
 const { Api, version } = require('@hugovidafe/useful-api')
 const { MessageEmbed } = require('discord.js')
 const ISO6391 = require('iso-639-1');
-const { prefix, TeamRole } = require('../database/config.json')
 
 const roles = { applications: { ayudante: [ 'Developer', 'Team', 'User' ] }, profiles: { Developer: [ 'ayudante.*' ], Team: [ 'ayudante.Team', 'ayudante.User' ], User: [ 'ayudante.User' ] } }
 
 module.exports = async (client, message) => {
   if (message.author.bot || message.author.system) return;
-  const server = client.guilds.cache.get('378284847048818698');
+  const server = client.guilds.cache.get(client.config.guild);
 
   // API / Databases
   const API = new Api({ path_langs: `${client.dirname}/database/i18n`, roles: roles });
 
   if (
-    client.user.id !== (client.keys.discord.bots[0] || client.keys.discord.bots[1]) &&
+    client.env != 'original' &&
     message.guild != null &&
+    client.config + `.${client.env}.prefix` != client.config.original.prefix &&
     !new RegExp(`^<@!?${client.user.id}>`).test(message.content)
   ) {
-    const bot = message.channel.members.has(client.keys.discord.bots[0]) || message.channel.members.has(client.keys.discord.bots[1])
+    const bot = message.channel.members.has(client.config.original.id) || message.channel.members.has(client.config.beta.id)
     if (bot) return;
   }
 
   // Prefixes
   const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const mentionRegex = new RegExp(`^(<@!?${client.user.id}>)\\s*`)
-  const prefixRegex = prefix? new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`): mentionRegex;
+  const prefixRegex = client.config + "." + client.env + ".prefix"? new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(client.config + "." + client.env + ".prefix")})\\s*`): mentionRegex;
   var args = "";
   var prefixUsed = "";
   if (message.channel.type == "dm" && !prefixRegex.test(message.content)) {
@@ -80,8 +80,8 @@ module.exports = async (client, message) => {
 
   // GET ROLE OF THE MEMBER
   var roleMember = 'User';
-  if (server.members.cache.get(message.author.id).roles.cache.has(TeamRole)) roleMember = 'Team';
-  if (message.author.id == client.keys.discord.owner) roleMember = 'Developer';
+  if (server.members.cache.get(message.author.id).roles.cache.has(client.config.TeamRole)) roleMember = 'Team';
+  if (message.author.id == client.config.owner) roleMember = 'Developer';
 
   if (command.perm) {
     if (!API.roles.getProfile(roleMember).hasRoles('ayudante.' + command.perm) ) return message.channel.send(new MessageEmbed()
