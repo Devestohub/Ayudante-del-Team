@@ -19,7 +19,7 @@ module.exports = async (client, message) => {
   if (
     client.env != 'original' &&
     message.guild != null &&
-    client.config + `.${client.env}.prefix` != client.config.original.prefix &&
+    client.config + `.${client.env}.prefix` == client.config.original.prefix &&
     !new RegExp(`^<@!?${client.user.id}>`).test(message.content)
   ) {
     const bot = message.channel.members.has(client.config.original.id) || message.channel.members.has(client.config.beta.id)
