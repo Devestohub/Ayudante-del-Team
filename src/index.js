@@ -5,6 +5,7 @@
 
 const fs = require('fs');
 const { Client, Collection } = require('discord.js');
+require('dotenv').config();
 
 const express = require('express')
 const app = express()
@@ -28,8 +29,8 @@ require('download-git-repo')('github:Hugovidafe/Translations#Ayudante-del-Team',
 
 const client = new Client();
 client.commands = new Collection();
-client.config = require('./database/config.json')
-client.keys = require('./keys');
+client.config = require('./database/config.json');
+client.env = require('./database/config.json').env;
 client.dirname = __dirname;
 
 const commandFiles = fs.readdirSync(__dirname + '/commands').filter(file => file.endsWith('.js') && !file.startsWith('.'));
@@ -49,4 +50,4 @@ for (const file of eventFiles) {
 
 app.listen(port)
 
-client.login(client.keys.discord.token)
+client.login(process.env.TOKEN)

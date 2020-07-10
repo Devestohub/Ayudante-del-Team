@@ -14,29 +14,11 @@ module.exports = async (client, message) => {
   if (message.author.bot || message.author.system) return;
   const server = client.guilds.cache.get('378284847048818698');
 
-  // Production environment?
-  var env = '';
-  const originalID = client.keys.discord.bots[0]
-  const betaID = client.keys.discord.bots[1]
-  const alphaID = client.keys.discord.bots[2]
-  const notOriginal = client.user.id != originalID? true: false;
-  switch (client.user.id) {
-    case betaID:
-      env = 'beta'
-      break;
-    case alphaID:
-      env = 'alpha'
-      break;
-    default:
-      env = 'production';
-      break;
-  }
-
   // API / Databases
-  const API = new Api({ path_langs: `${client.dirname}/database/i18n/${env}`, roles: roles });
+  const API = new Api({ path_langs: `${client.dirname}/database/i18n/${client.env}`, roles: roles });
 
   if (
-    notOriginal &&
+    client.env != 'original' &&
     message.guild != null &&
     !new RegExp(`^<@!?${client.user.id}>`).test(message.content)
   ) {
@@ -59,7 +41,7 @@ module.exports = async (client, message) => {
   } else return;
 
   // LANGS
-  const i18n = require('fs').readdirSync(`${client.dirname}/database/i18n/${env}`).filter(file => file.endsWith('.json') && !file.startsWith('.'))
+  const i18n = require('fs').readdirSync(`${client.dirname}/database/i18n/${client.env}`).filter(file => file.endsWith('.json') && !file.startsWith('.'))
   const lang = i18n.map(lang => {
     const Langs = lang.substring(0, lang.lastIndexOf('.'));
     return '<' + ISO6391.getNativeName(Langs) + '/' + ISO6391.getName(Langs) + '/' + Langs + `>\n> ${prefixUsed}user config lang ` + Langs;
