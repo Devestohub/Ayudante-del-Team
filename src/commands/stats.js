@@ -11,7 +11,7 @@ module.exports = {
   perm: 'Team',
   async execute(message, embed, { client, args, API, prefixUsed, version }) {
 
-    const server = client.guilds.cache.get('378284847048818698');
+    const server = client.guilds.cache.get(client.config.guild);
     const stext = server.channels.cache.filter(c => c.type == "text").size
     const svoice = server.channels.cache.filter(c => c.type == "voice").size
 
