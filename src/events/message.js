@@ -79,7 +79,7 @@ module.exports = async (client, message) => {
 
   // GET ROLE OF THE MEMBER
   var roleMember = 'User';
-  if (server.members.cache.get(message.author.id).roles.cache.has(TeamRole)) roleMember = 'Team';
+  if (server.members.cache.get(message.author.id).roles.cache.has(client.config.TeamRole)) roleMember = 'Team';
   if (message.author.id == client.keys.discord.owner) roleMember = 'Developer';
 
   if (command.perm) {
