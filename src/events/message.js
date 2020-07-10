@@ -28,7 +28,7 @@ module.exports = async (client, message) => {
   // Prefixes
   const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const mentionRegex = new RegExp(`^(<@!?${client.user.id}>)\\s*`)
-  const prefixRegex = prefix? new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(client.config + "." + client.env + "." + prefix)})\\s*`): mentionRegex;
+  const prefixRegex = client.config + "." + client.env + "." + prefix? new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(client.config + "." + client.env + "." + prefix)})\\s*`): mentionRegex;
   var args = "";
   var prefixUsed = "";
   if (message.channel.type == "dm" && !prefixRegex.test(message.content)) {
