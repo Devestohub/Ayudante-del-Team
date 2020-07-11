@@ -34,10 +34,8 @@ module.exports = async (client, message) => {
     client.confenv.prefix == client.config.original.prefix &&
     !new RegExp(`^<@!?${client.user.id}>`).test(message.content)
   ) {
-    var bot = false;
-    bot = client.env == 'beta'? message.channel.members.has(client.config.original.id)? true: false: false;
-    bot = client.env == 'alpha'? message.channel.members.has(client.config.original.id) || message.channel.members.has(client.config.beta.id)? true: false: false;
-    if (bot) return;
+    if (client.env == 'beta'? message.channel.members.has(client.config.original.id)? true: false: false) return;
+    if (client.env == 'alpha'? message.channel.members.has(client.config.original.id) || message.channel.members.has(client.config.beta.id)? true: false: false) return;
   }
 
   // Prefixes
