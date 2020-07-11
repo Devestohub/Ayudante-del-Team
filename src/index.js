@@ -30,7 +30,7 @@ require('download-git-repo')('github:Hugovidafe/Translations#Ayudante-del-Team',
 const client = new Client();
 client.commands = new Collection();
 client.config = require('./database/config.json');
-client.env = client.config.env;
+client.env = '';
 client.dirname = __dirname;
 
 const commandFiles = fs.readdirSync(__dirname + '/commands').filter(file => file.endsWith('.js') && !file.startsWith('.'));

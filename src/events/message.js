@@ -16,10 +16,22 @@ module.exports = async (client, message) => {
   // API / Databases
   const API = new Api({ path_langs: `${client.dirname}/database/i18n`, roles: roles });
 
+  switch (client.env) {
+    case 'original':
+      client.confenv = client.config.original
+      break;
+    case 'beta':
+      client.confenv = client.config.beta
+      break;
+    case 'alpha':
+      client.confenv = client.config.alpha
+      break;
+  }
+
   if (
     client.env != 'original' &&
     message.guild != null &&
-    client.config + `.${client.env}.prefix` == client.config.original.prefix &&
+    client.confenv.prefix == client.config.original.prefix &&
     !new RegExp(`^<@!?${client.user.id}>`).test(message.content)
   ) {
     const bot = message.channel.members.has(client.config.original.id) || message.channel.members.has(client.config.beta.id)
@@ -29,7 +41,7 @@ module.exports = async (client, message) => {
   // Prefixes
   const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const mentionRegex = new RegExp(`^(<@!?${client.user.id}>)\\s*`)
-  const prefixRegex = client.config + "." + client.env + ".prefix"? new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(client.config + "." + client.env + ".prefix")})\\s*`): mentionRegex;
+  const prefixRegex = client.confenv.prefix? new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(client.confenv.prefix)})\\s*`): mentionRegex;
   var args = "";
   var prefixUsed = "";
   if (message.channel.type == "dm" && !prefixRegex.test(message.content)) {
