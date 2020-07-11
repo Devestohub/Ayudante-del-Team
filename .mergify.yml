@@ -1,7 +1,7 @@
 pull_request_rules:
   - name: Automatic merge on Pull Request
     conditions:
-      - author=Hugovidafe
+      - author=hugo-vidal-ferre
     actions:
       merge:
         method: merge
@@ -23,5 +23,5 @@ pull_request_rules:
           This PR features a major change and requires further approval.
       request_reviews:
         users:
-          - Hugovidafe
+          - hugo-vidal-ferre
       delete_head_branch:
