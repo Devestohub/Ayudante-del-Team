@@ -3,7 +3,7 @@
 // Created: 27/6/2020 12:30:8
 // Modified: 9/7/2020 10:55:49
 
-const { Api } = require("@hugovidafe/useful-api");
+const Api = require("@hugovidafe/useful-api");
 
 module.exports = {
   name: 'eval',
