@@ -1,15 +1,14 @@
 // Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
 // Ayudante de Hugovidafe (c) 2020
 // Created: 11/7/2020 13:00:8
-// Modified: 11/7/2020 13:05:14
+// Modified: a
 
 module.exports = {
   name: 'ping',
   usage: '[number of times to do ping]',
   perm: "User",
   execute(message, embed, { client, args, API, prefixUsed, version }) {
-    global.msgc = msg.createdTimestamp;
-    if (msg.deletable) msg.delete();
+    global.msgc = message.createdTimestamp;
     if (!args[0] || args[0] === "1") {
       const msg = await message.channel.send(embed
         .setColor("#7289da")
