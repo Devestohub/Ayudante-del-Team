@@ -1,147 +1,160 @@
 {
-	"bot": {
-		"name": "Ayudante del Team"
-	},
-	"onMessage": {
-		"commandError": {
-			"title": "¡He tenido un problema ejecutando el comando: `%s`!",
-			"description": "El desarrollador está al corriente, disculpad las molestias."
-		},
-		"inDeveloping": {
-			"title": "¡\"%s\" en desarrollo!",
-			"description": "El desarrollador trabaja diariamente para mejorar el funcionamiento del bot."
-		},
-		"noArgs": {
-			"title": "¡El comando solo funciona con argumentos!",
-			"usage": "El uso adecuado del comando es: `%s`.",
-			"noUsage": "La explicación del uso de este comando no está disponible."
-		},
-		"noCommand": "¡El comando mencionado no existe!",
-		"noLang": {
-			"title": "¡Debes de definir un idioma antes de continuar!",
-			"description": "Idiomas disponibles:"
-		},
-		"noPerms": {
-			"title": "¡No tienes suficientes permisos para ejecutar `%s`!",
-			"description": "Posees el rol `{{userPerm}}`, debes de tener, como mínimo, el rol `{{commandPerm}}`."
-		},
-		"noSend": {
-			"title": "¡No tengo suficientes permisos!",
-			"description": {
-				"one": "¡Requiero de \"{{permRequired}}\" para enviar el contenido en ese servidor o canal!",
-				"multiples": "¡Requiero de {{permsRequired}} para enviar el contenido en ese servidor o canal!"
-			}
-		}
-	},
-	"users": {
-		"roles": {
-			"Developer": {
-				"one": "Desarrollador",
-				"multiples": "Desarrolladores"
-			},
-			"Team": {
-				"one": "Equipo",
-				"multiples": "Equipos"
-			},
-			"User": {
-				"one": "Usuario",
-				"multiples": "Usuarios"
-			}
-		}
-	},
-	"commands": {
-		"help": {
-			"description": "Descubre comandos del bot",
-			"embed": {
-				"title": "Comandos perturbadores",
-				"description": "Consulta qué comandos puedes ejecutar",
-				"fields": {
-					"name": "Comandos para %s",
-					"allCommands": "Escribe \"{{{help}}}help\" para ver todos los comandos disponibles."
-				}
-			},
-			"embedCommand": {
-				"title": "Información perturbadora del comando",
-				"description": "¿Comando perturbador?: %s",
-				"fields": {
-					"aliases": "ALIAS:",
-					"description": "DESCRIPCIÓN:",
-					"permissions": "PERMISO:",
-					"usage": "USO:"
-				}
-			}
-		},
-		"reload": {
-			"description": "Sirve para reiniciar el bot",
-			"embed": {
-				"title": "¡El bot se está reiniciando!",
-				"description": "Reinicio ejecutado por: %s"
-			},
-			"embedCommandError": {
-				"title": "¡Comando `%s` no refrescado!",
-				"description": "Ha ocurrido el siguiente error:\n%s"
-			},
-			"embedCommandRefreshed": {
-				"title": "¡Comando refrescado!",
-				"description": "El comando `%s` se ha refrescado correctamente"
-			},
-			"embedLocale": {
-				"success": "¡Idiomas refrescados!",
-				"fail": "¡Error refrescando los idiomas!"
-			}
-		},
-		"info": {
-			"description": "Descubre información del bot",
-			"embed": {
-				"title": "Información perturbadora",
-				"description": "Consulta qué perturbante es esta información",
-				"fields": {
-					"versions": {
-						"name": "Versiones",
-						"value": "Bot y api: {{botVersion}}\nDiscord.js: {{discordJsVersion}}\nNodeJS - npm: {{systemVersion}}"
-					},
-					"systemStatistics": "Estadísticas del sistema",
-					"within": {
-						"name": "Dentro de..."
-					},
-					"using": {
-						"name": "usando...",
-						"value": "{{RAM}}% de RAM"
-					},
-					"running": {
-						"name": "durante..."
-					}
-				}
-			}
-		},
-		"eval": {
-			"description": "Prueba y evalúa códigos de programación"
-		},
-		"stats": {
-		  "description": "Actualiza las estadísticas del servidor",
-		  "embed": {
-		    "title": "¡Estadísticas actualizadas!",
-		    "description": "Las estadísticas se han actualizado correctamente"
-		  }
-		}
-	},
-	"time": {
-		"second": "segundo",
-		"seconds": "segundos",
-		"minute": "minuto",
-		"minutes": "minutos",
-		"hour": "hora",
-		"hours": "horas",
-		"day": "día",
-		"days": "días",
-		"week": "semana",
-		"weeks": "semanas",
-		"month": "mes",
-		"months": "meses",
-		"year": "año",
-		"years": "años"
-	},
-	"words": {
-		"and": "y"
-	}
+  "bot": {
+    "name": "Ayudante del Team"
+  },
+  "onMessage": {
+    "commandError": {
+      "title": "¡He tenido un problema ejecutando el comando: `%s`!",
+      "description": "El desarrollador está al corriente, disculpad las molestias."
+    },
+    "inDeveloping": {
+      "title": "¡\"%s\" en desarrollo!",
+      "description": "El desarrollador trabaja diariamente para mejorar el funcionamiento del bot."
+    },
+    "noArgs": {
+      "title": "¡El comando solo funciona con argumentos!",
+      "usage": "El uso adecuado del comando es: `%s`.",
+      "noUsage": "La explicación del uso de este comando no está disponible."
+    },
+    "noCommand": "¡El comando mencionado no existe!",
+    "noLang": {
+      "title": "¡Debes de definir un idioma antes de continuar!",
+      "description": "Idiomas disponibles:"
+    },
+    "noPerms": {
+      "title": "¡No tienes suficientes permisos para ejecutar `%s`!",
+      "description": "Posees el rol `{{userPerm}}`, debes de tener, como mínimo, el rol `{{commandPerm}}`."
+    },
+    "noSend": {
+      "title": "¡No tengo suficientes permisos!",
+      "description": {
+        "one": "¡Requiero de \"{{permRequired}}\" para enviar el contenido en ese servidor o canal!",
+        "multiples": "¡Requiero de {{permsRequired}} para enviar el contenido en ese servidor o canal!"
+      }
+    }
+  },
+  "users": {
+    "roles": {
+      "Developer": {
+        "one": "Desarrollador",
+        "multiples": "Desarrolladores"
+      },
+      "Team": {
+        "one": "Equipo",
+        "multiples": "Equipos"
+      },
+      "User": {
+        "one": "Usuario",
+        "multiples": "Usuarios"
+      }
+    }
+  },
+  "commands": {
+    "help": {
+      "description": "Descubre comandos del bot",
+      "embed": {
+        "title": "Comandos perturbadores",
+        "description": "Consulta qué comandos puedes ejecutar",
+        "descPrefix": "poniendo \"{{{prefix}}}\" delante de cada comando",
+        "fields": {
+          "name": "Comandos para %s",
+          "helpCommand": "Escribe \"{{{prefix}}}help\" delante de un comando para ver información detallada del comando",
+          "allCommands": "Escribe \"{{{prefix}}}help\" para ver todos los comandos disponibles."
+        }
+      },
+      "embedCommand": {
+        "title": "Información perturbadora del comando",
+        "description": "¿Comando perturbador?: %s",
+        "fields": {
+          "aliases": "ALIAS:",
+          "description": "DESCRIPCIÓN:",
+          "permissions": "PERMISO:",
+          "usage": "USO:"
+        }
+      }
+    },
+    "reload": {
+      "description": "Sirve para reiniciar el bot",
+      "embed": {
+        "title": "¡El bot se está reiniciando!",
+        "description": "Reinicio ejecutado por: %s"
+      },
+      "embedCommandError": {
+        "title": "¡Comando `%s` no refrescado!",
+        "description": "Ha ocurrido el siguiente error:\n%s"
+      },
+      "embedCommandRefreshed": {
+        "title": "¡Comando refrescado!",
+        "description": "El comando `%s` se ha refrescado correctamente"
+      },
+      "embedLocale": {
+        "success": "¡Idiomas refrescados!",
+        "fail": "¡Error refrescando los idiomas!"
+      }
+    },
+    "info": {
+      "description": "Descubre información del bot",
+      "embed": {
+        "title": "Información perturbadora",
+        "description": "Consulta qué perturbante es esta información",
+        "fields": {
+          "versions": {
+            "name": "Versiones",
+            "value": "Bot y api: {{botVersion}}\nDiscord.js: {{discordJsVersion}}\nNodeJS - npm: {{systemVersion}}"
+          },
+          "systemStatistics": "Estadísticas del sistema",
+          "within": {
+            "name": "Dentro de..."
+          },
+          "using": {
+            "name": "usando...",
+            "value": "{{RAM}}% de RAM"
+          },
+          "running": {
+            "name": "durante..."
+          }
+        }
+      }
+    },
+    "eval": {
+      "description": "Prueba y evalúa códigos de programación"
+    },
+    "stats": {
+      "description": "Actualiza las estadísticas del servidor",
+      "embed": {
+        "title": "¡Estadísticas actualizadas!",
+        "description": "Las estadísticas se han actualizado correctamente"
+      }
+    },
+    "ping": {
+      "description": "Mide la latencia del bot con Discord",
+      "embed": {
+        "title": "¡Estamos comprobando!",
+        "description": "Por favor, espere varios segundos"
+      },
+      "embedPong": {
+        "title": "¡Medición completada!",
+        "description": "Mi latencia es de `{{latency}}`ms.\nMientras que la latencia de la API es de `{{API}}`ms."
+      }
+    }
+  },
+  "time": {
+    "second": "segundo",
+    "seconds": "segundos",
+    "minute": "minuto",
+    "minutes": "minutos",
+    "hour": "hora",
+    "hours": "horas",
+    "day": "día",
+    "days": "días",
+    "week": "semana",
+    "weeks": "semanas",
+    "month": "mes",
+    "months": "meses",
+    "year": "año",
+    "years": "años"
+  },
+  "words": {
+    "and": "y"
+  }
 }
