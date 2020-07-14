@@ -21,7 +21,7 @@ module.exports = {
         msg.edit(embed
           .setColor('#7289da')
           .setTitle(':information_source: ' + API.langs.__('commands.ping.embedPong.title'))
-          .setDescription(API.langs.__('commands.ping.embedPong.description', { latency: Math.floor(message.createdTimestamp - msgc), API: Math.round(client.ws.ping) }))
+          .setDescription(API.langs.__('commands.ping.embedPong.description', { latency: Math.floor(msg.createdTimestamp - msgc), API: Math.round(client.ws.ping) }))
           .setTimestamp()
           .setFooter("© " + new Date().getFullYear() + " " + client.user.username, message.client.user.displayAvatarURL())
         )
