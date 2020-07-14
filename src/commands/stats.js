@@ -1,5 +1,5 @@
-// Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
-// Ayudante de Hugovidafe (c) 2020
+// Author: Devestoguy <devestoguy@gmail.com>
+// Ayudante del Team (c) 2020
 // Created: 9/7/2020 1:31:40
 // Modified: 9/7/2020 1:55:20
 
@@ -52,7 +52,7 @@ module.exports = {
         .setTitle(':white_check_mark: ' + API.langs.__('commands.stats.embed.title'))
         .setDescription(API.langs.__('commands.stats.embed.description'))
         .setTimestamp()
-        .setFooter("© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), message.client.user.displayAvatarURL())
+        .setFooter("© " + new Date().getFullYear() + " " + client.user.username, message.client.user.displayAvatarURL())
     )
   }
 };
