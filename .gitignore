@@ -75,6 +75,6 @@ jspm_packages
 # Heroku Env
 .env
 
-# AYUDANTE DE HUGOVIDAFE
+# AYUDANTE DEL TEAM
 src/database/i18n/
 developing.js
