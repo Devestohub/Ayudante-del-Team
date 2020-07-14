@@ -1,7 +1,7 @@
-// Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
-// Ayudante de Hugovidafe (c) 2020
+// Author: Devestoguy <devestoguy@gmail.com>
+// Ayudante del Team (c) 2020
 // Created: 27/6/2020 11:13:38
-// Modified: 9/7/2020 8:6:2
+// Modified: a
 
 const fs = require('fs');
 const { Client, Collection } = require('discord.js');
@@ -22,10 +22,6 @@ app.get('/folders/*', (req, res) => {
   });
   res.send(files.join("\n"))
 })
-
-
-require('download-git-repo')('github:Hugovidafe/Translations#Ayudante-del-Team', 'src/database/i18n', function(err) { console.log(err? "Error downloading translations": "") })
-
 
 const client = new Client();
 client.commands = new Collection();

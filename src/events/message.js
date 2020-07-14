@@ -1,5 +1,5 @@
-// Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
-// Ayudante de Hugovidafe (c) 2020
+// Author: Devestoguy <devestoguy@gmail.com>
+// Ayudante del Team (c) 2020
 // Created: 27/6/2020 12:30:26
 // Modified: 9/7/2020 19:31:12
 
@@ -17,8 +17,8 @@ module.exports = async (client, message) => {
   const API = new Api({ path_langs: `${client.dirname}/database/i18n`, roles: roles });
 
   switch (client.env) {
-    case 'original':
-      client.confenv = client.config.original
+    case 'master':
+      client.confenv = client.config.master
       break;
     case 'beta':
       client.confenv = client.config.beta
@@ -29,13 +29,13 @@ module.exports = async (client, message) => {
   }
 
   if (
-    client.env != 'original' &&
+    client.env != 'master' &&
     message.guild != null &&
-    client.confenv.prefix == client.config.original.prefix &&
+    client.confenv.prefix == client.config.master.prefix &&
     !new RegExp(`^<@!?${client.user.id}>`).test(message.content)
   ) {
-    if (client.env == 'beta'? message.channel.members.has(client.config.original.id)? true: false: false) return;
-    if (client.env == 'alpha'? message.channel.members.has(client.config.original.id) || message.channel.members.has(client.config.beta.id)? true: false: false) return;
+    if (client.env == 'beta'? message.channel.members.has(client.config.master.id)? true: false: false) return;
+    if (client.env == 'alpha'? message.channel.members.has(client.config.master.id) || message.channel.members.has(client.config.beta.id)? true: false: false) return;
   }
 
   // Prefixes
@@ -65,7 +65,7 @@ module.exports = async (client, message) => {
     .setTitle(':exclamation: ' + API.langs.__l('onMessage.noLang').join("\n:exclamation: "))
     .setDescription('```md\n# ' + API.langs.__l('onMessage.noSend.description.one', { permRequired: 'SEND_MESSAGES' }).join("\n# ") + '\n\n' + lang + '```')
     .setTimestamp()
-    .setFooter("© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), message.client.user.displayAvatarURL())
+    .setFooter("© " + new Date().getFullYear() + " " + client.user.username, message.client.user.displayAvatarURL())
   );
 
   const commandName = args.shift().toLowerCase();
@@ -87,7 +87,7 @@ module.exports = async (client, message) => {
     .setTitle(':exclamation: ' + API.langs.__('onMessage.noCommand'))
     .setDescription('**' + API.langs.__('commands.help.embed.fields.allCommands', { prefix: prefixUsed }) + '**')
     .setTimestamp()
-    .setFooter("© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), message.client.user.displayAvatarURL())
+    .setFooter("© " + new Date().getFullYear() + " " + client.user.username, message.client.user.displayAvatarURL())
   )
 
   // GET ROLE OF THE MEMBER
@@ -101,7 +101,7 @@ module.exports = async (client, message) => {
       .setTitle(':exclamation: ' + API.langs.__('onMessage.noPerms.title', command.name))
       .setDescription(API.langs.__('onMessage.noPerms.description', { userPerm: API.langs.__('users.roles.' + roleMember + '.one'), commandPerm: API.langs.__('users.roles.' + command.perm + '.one') }))
       .setTimestamp()
-      .setFooter("© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), message.client.user.displayAvatarURL())
+      .setFooter("© " + new Date().getFullYear() + " " + client.user.username, message.client.user.displayAvatarURL())
     );
   }
 
@@ -134,7 +134,7 @@ module.exports = async (client, message) => {
       .setTitle(':exclamation: ' + API.langs.__('onMessage.commandError.title', command.name))
       .setDescription(API.langs.__('onMessage.commandError.description'))
       .setTimestamp()
-      .setFooter("© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), message.client.user.displayAvatarURL())
+      .setFooter("© " + new Date().getFullYear() + " " + client.user.username, message.client.user.displayAvatarURL())
     );
   }
 }

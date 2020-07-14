@@ -1,15 +1,15 @@
-// Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
-// Ayudante de Hugovidafe (c) 2020
+// Author: Devestoguy <devestoguy@gmail.com>
+// Ayudante del Team (c) 2020
 // Created: 27/6/2020 11:44:15
-// Modified: 9/7/2020 14:1:18
+// Modified: a
 
 const moment = require("moment");
 require("moment-duration-format");
 
 module.exports = async (client) => {
   switch (client.user.id) {
-    case client.config.original.id:
-      client.env = "original";
+    case client.config.master.id:
+      client.env = "master";
       break;
     case client.config.beta.id:
       client.env = "beta";
@@ -20,6 +20,8 @@ module.exports = async (client) => {
   }
   console.log(`${client.env} ${client.user.tag} / ${client.user.id}`);
   client.user.setPresence({ status: 'dnd', activity: {name: 'iniciarse...', type: 'PLAYING' }});
+
+  if (client.env != "alpha") require('download-git-repo')(`github:Devestohub/Ayudante-del-team-Translations#${client.env}`, 'src/database/i18n', function(err) { console.log(err? "Error downloading translations": null) })
 
   const server = client.guilds.cache.get(client.config.guild);
   const stext = server.channels.cache.filter(c => c.type == "text").size
@@ -34,7 +36,7 @@ module.exports = async (client) => {
 
   // 5 SECONDS
   setInterval(function() {
-    if (client.env != "original") return;
+    if (client.env != "master") return;
     // Number of members on the server
     const cnumber = client.channels.cache.get('497436073052602379')
     cnumber.edit({name: `﴿ MIEMBROS: ${server.memberCount} ﴾`})
@@ -51,7 +53,7 @@ module.exports = async (client) => {
 
   // 10 MINUTES
   setInterval(function() {
-    if (client.env != "original") return;
+    if (client.env != "master") return;
     // Correctly establish roles
     const roles = ['727444149980364851', '727443564795265085', '720572925198991432', '720574206978293811']
     server.members.cache.filter(m => !m.user.bot).forEach(member => roles.forEach(rs => member.roles.add(server.roles.cache.find(r => r.id == rs))))
@@ -69,8 +71,8 @@ module.exports = async (client) => {
   // 12 HORAS
   setInterval(function() {
     // Donwloading translations
-    require('download-git-repo')('github:Hugovidafe/Translations#Ayudante-del-Team', 'src/database/i18n', function(err) { console.log(err? "Error downloading translations": "") })
-    if (client.env != "original") return;
+    if (client.env != "alpha") require('download-git-repo')(`github:Devestohub/Ayudante-del-team-Translations#${client.env}`, 'src/database/i18n', function(err) { console.log(err? "Error downloading translations": null) })
+    if (client.env != "master") return;
     // Days that the server has been created
     const cdays = client.channels.cache.get('496300809030467584');
     const days = new Date().getTime() - server.createdTimestamp;

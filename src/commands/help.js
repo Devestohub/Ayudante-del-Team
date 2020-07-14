@@ -1,5 +1,5 @@
-// Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
-// Ayudante de Hugovidafe (c) 2020
+// Author: Devestoguy <devestoguy@gmail.com>
+// Ayudante del Team (c) 2020
 // Created: 27/6/2020 12:30:3
 // Modified: 9/7/2020 14:38:30
 
@@ -57,7 +57,7 @@ module.exports = {
         .setTitle(':exclamation: ' + API.langs.__('onMessage.noCommand'))
         .setDescription('**' + API.langs.__('commands.help.embed.fields.allCommands', { prefix: prefixUsed }) + '**')
         .setTimestamp()
-        .setFooter("© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), message.client.user.displayAvatarURL())
+        .setFooter("© " + new Date().getFullYear() + " " + client.user.username, message.client.user.displayAvatarURL())
       )
     }
 
@@ -74,7 +74,7 @@ module.exports = {
       .setDescription(`**${API.langs.__('commands.help.embedCommand.description', `\`${command.name}\``)}**\n` + '```diff\n' + info.join('\n\n') + '```')
       .addField('\u200B', '**' + API.langs.__('commands.help.embed.fields.allCommands', { prefix: prefixUsed }) + '**')
       .setTimestamp()
-      .setFooter("© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), message.client.user.displayAvatarURL())
+      .setFooter("© " + new Date().getFullYear() + " " + client.user.username, message.client.user.displayAvatarURL())
     )
   }
 };
