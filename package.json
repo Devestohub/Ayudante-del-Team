@@ -1,7 +1,7 @@
 {
   "name": "ayudante-del-team",
   "version": "0.2.1",
-  "description": "Ayudante del Team para el servidor de Discord \"dEVESTOHUB\"",
+  "description": "Ayudante del Team para el servidor de Discord \"Devestohub\"",
   "main": "src/index.js",
   "scripts": {
     "start": "pm2-runtime start ecosystem.config.js --env production"
