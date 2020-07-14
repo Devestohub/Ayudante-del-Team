@@ -1,7 +1,4 @@
 {
-  "bot": {
-    "name": "Ayudante del Team"
-  },
   "onMessage": {
     "commandError": {
       "title": "¡He tenido un problema ejecutando el comando: `%s`!",
