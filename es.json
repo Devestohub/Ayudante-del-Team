@@ -129,7 +129,7 @@
     "ping": {
       "description": "Mide la latencia del bot con Discord",
       "embed": {
-        "title": "¡Estamos comprobando!",
+        "title": "¡Estamos mediendo la latencia!",
         "description": "Por favor, espere varios segundos"
       },
       "embedPong": {
