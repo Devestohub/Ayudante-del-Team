@@ -1,7 +1,7 @@
 // Author: Devestoguy <devestoguy@gmail.com>
 // Ayudante del Team (c) 2020
 // Created: 11/7/2020 13:00:8
-// Modified: a
+// Modified: 15/7/2020 8:23:21
 
 module.exports = {
   name: 'ping',

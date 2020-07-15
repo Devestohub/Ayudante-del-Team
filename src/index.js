@@ -1,7 +1,7 @@
 // Author: Devestoguy <devestoguy@gmail.com>
 // Ayudante del Team (c) 2020
 // Created: 27/6/2020 11:13:38
-// Modified: a
+// Modified: 15/7/2020 8:23:13
 
 const fs = require('fs');
 const { Client, Collection } = require('discord.js');
