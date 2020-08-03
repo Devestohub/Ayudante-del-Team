@@ -17,7 +17,7 @@ module.exports = {
         description: API.langs.__('commands.help.embed.description'),
         fields: [],
         timestamp: new Date(),
-        footer: { text: "© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), icon_url: message.client.user.displayAvatarURL() }
+        footer: { text: "© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), icon_url: client.user.displayAvatarURL() }
       }
 
       const categories = {}
@@ -57,7 +57,7 @@ module.exports = {
         .setTitle(':exclamation: ' + API.langs.__('onMessage.noCommand'))
         .setDescription('**' + API.langs.__('commands.help.embed.fields.allCommands', { prefix: prefixUsed }) + '**')
         .setTimestamp()
-        .setFooter("© " + new Date().getFullYear() + " " + client.user.username, message.client.user.displayAvatarURL())
+        .setFooter("© " + new Date().getFullYear() + " " + client.user.username, client.user.displayAvatarURL())
       )
     }
 
@@ -74,7 +74,7 @@ module.exports = {
       .setDescription(`**${API.langs.__('commands.help.embedCommand.description', `\`${command.name}\``)}**\n` + '```diff\n' + info.join('\n\n') + '```')
       .addField('\u200B', '**' + API.langs.__('commands.help.embed.fields.allCommands', { prefix: prefixUsed }) + '**')
       .setTimestamp()
-      .setFooter("© " + new Date().getFullYear() + " " + client.user.username, message.client.user.displayAvatarURL())
+      .setFooter("© " + new Date().getFullYear() + " " + client.user.username, client.user.displayAvatarURL())
     )
   }
 };

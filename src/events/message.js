@@ -65,7 +65,7 @@ module.exports = async (client, message) => {
     .setTitle(':exclamation: ' + API.langs.__l('onMessage.noLang').join("\n:exclamation: "))
     .setDescription('```md\n# ' + API.langs.__l('onMessage.noSend.description.one', { permRequired: 'SEND_MESSAGES' }).join("\n# ") + '\n\n' + lang + '```')
     .setTimestamp()
-    .setFooter("© " + new Date().getFullYear() + " " + client.user.username, message.client.user.displayAvatarURL())
+    .setFooter("© " + new Date().getFullYear() + " " + client.user.username, client.user.displayAvatarURL())
   );
 
   const commandName = args.shift().toLowerCase();
@@ -87,7 +87,7 @@ module.exports = async (client, message) => {
     .setTitle(':exclamation: ' + API.langs.__('onMessage.noCommand'))
     .setDescription('**' + API.langs.__('commands.help.embed.fields.allCommands', { prefix: prefixUsed }) + '**')
     .setTimestamp()
-    .setFooter("© " + new Date().getFullYear() + " " + client.user.username, message.client.user.displayAvatarURL())
+    .setFooter("© " + new Date().getFullYear() + " " + client.user.username, client.user.displayAvatarURL())
   )
 
   // GET ROLE OF THE MEMBER
@@ -101,7 +101,7 @@ module.exports = async (client, message) => {
       .setTitle(':exclamation: ' + API.langs.__('onMessage.noPerms.title', command.name))
       .setDescription(API.langs.__('onMessage.noPerms.description', { userPerm: API.langs.__('users.roles.' + roleMember + '.one'), commandPerm: API.langs.__('users.roles.' + command.perm + '.one') }))
       .setTimestamp()
-      .setFooter("© " + new Date().getFullYear() + " " + client.user.username, message.client.user.displayAvatarURL())
+      .setFooter("© " + new Date().getFullYear() + " " + client.user.username, client.user.displayAvatarURL())
     );
   }
 
@@ -134,7 +134,7 @@ module.exports = async (client, message) => {
       .setTitle(':exclamation: ' + API.langs.__('onMessage.commandError.title', command.name))
       .setDescription(API.langs.__('onMessage.commandError.description'))
       .setTimestamp()
-      .setFooter("© " + new Date().getFullYear() + " " + client.user.username, message.client.user.displayAvatarURL())
+      .setFooter("© " + new Date().getFullYear() + " " + client.user.username, client.user.displayAvatarURL())
     );
   }
 }

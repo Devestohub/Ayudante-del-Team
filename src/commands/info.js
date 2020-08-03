@@ -38,7 +38,7 @@ module.exports = {
     })
 
     if (!args.length) {
-      const duration = moment.duration(message.client.uptime).format(`y __, M __, w __, d __, h __, m __ [${API.langs.__('words.and')}] s __`);
+      const duration = moment.duration(client.uptime).format(`y __, M __, w __, d __, h __, m __ [${API.langs.__('words.and')}] s __`);
       message.channel.send(embed
         .setColor('#7289da')
         .setTitle(':information_source: ' + API.langs.__('commands.info.embed.title'))
@@ -52,7 +52,7 @@ module.exports = {
           { name: API.langs.__('commands.info.embed.fields.running.name'), value: duration, inline: true },
         )
         .setTimestamp()
-        .setFooter("© " + new Date().getFullYear() + " " + client.user.username, message.client.user.displayAvatarURL())
+        .setFooter("© " + new Date().getFullYear() + " " + client.user.username, client.user.displayAvatarURL())
       )
     }
   }
