@@ -52,7 +52,7 @@ module.exports = {
         .setTitle(':white_check_mark: ' + API.langs.__('commands.stats.embed.title'))
         .setDescription(API.langs.__('commands.stats.embed.description'))
         .setTimestamp()
-        .setFooter("© " + new Date().getFullYear() + " " + client.user.username, message.client.user.displayAvatarURL())
+        .setFooter("© " + new Date().getFullYear() + " " + client.user.username, client.user.displayAvatarURL())
     )
   }
 };

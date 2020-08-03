@@ -1,6 +1,6 @@
 {
   "name": "ayudante-del-team",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Ayudante del Team para el servidor de Discord \"Devestohub\"",
   "main": "src/index.js",
   "scripts": {
@@ -31,6 +31,7 @@
     "moment": "^2.27.0",
     "moment-duration-format": "^2.3.2",
     "pm2": "^4.4.0",
+    "twitch-api-v5": "^2.0.4",
     "util": "^0.12.3"
   },
   "devDependencies": {}
