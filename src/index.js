@@ -1,7 +1,7 @@
 // Author: Devestoguy <devestoguy@gmail.com>
 // Ayudante del Team (c) 2020
 // Created: 27/6/2020 11:13:38
-// Modified: 15/7/2020 8:23:13
+// Modified: 3/8/2020 19:10:36
 
 const fs = require('fs');
 const { Client, Collection } = require('discord.js');
@@ -28,6 +28,7 @@ client.commands = new Collection();
 client.config = require('./database/config.json');
 client.env = '';
 client.dirname = __dirname;
+client.twitch = require('twitch-api-v5');
 
 const commandFiles = fs.readdirSync(__dirname + '/commands').filter(file => file.endsWith('.js') && !file.startsWith('.'));
 
