@@ -1,7 +1,7 @@
 // Author: Devestoguy <devestoguy@gmail.com>
 // Ayudante del Team (c) 2020
 // Created: 27/6/2020 12:30:26
-// Modified: 9/7/2020 19:31:12
+// Modified: 3/8/2020 20:57:12
 
 const { Api, version } = require('@hugovidafe/useful-api')
 const { MessageEmbed } = require('discord.js')
@@ -92,7 +92,7 @@ module.exports = async (client, message) => {
 
   // GET ROLE OF THE MEMBER
   var roleMember = 'User';
-  if (server.members.cache.get(message.author.id).roles.cache.has(client.config.TeamRole)) roleMember = 'Team';
+  if (server.members.cache.has(message.author.id) && server.members.cache.get(message.author.id).roles.cache.has(client.config.TeamRole)) roleMember = 'Team';
   if (message.author.id == client.config.owner) roleMember = 'Developer';
 
   if (command.perm) {

@@ -1,7 +1,7 @@
 // Author: Devestoguy <devestoguy@gmail.com>
 // Ayudante del Team (c) 2020
 // Created: 9/7/2020 1:31:40
-// Modified: 9/7/2020 1:55:20
+// Modified: 3/8/2020 21:4:8
 
 const moment = require("moment");
 require("moment-duration-format");
@@ -37,6 +37,13 @@ module.exports = {
     // Number of text channels on the server
     const ctextc = client.channels.cache.get('497470853852954635')
     await ctextc.edit({ name: `﴿ DE TEXTO: ${stext} ﴾` })
+    // Number of followers of Lunna
+    const slfollowers = client.channels.cache.get('739893323514511430')
+    client.twitch.clientID = 'gp762nuuoqcoxypju8c569th9wz7q5';
+    client.twitch.channels.channelByID({ channelID: '476324921' }, (err, res) => {
+      if (err) return console.log(err);
+      slfollowers.edit({name: `👥❳ Seguidores: ${res.followers}`})
+    })
 
     // Days that the server has been created
     const cdays = client.channels.cache.get('496300809030467584')
