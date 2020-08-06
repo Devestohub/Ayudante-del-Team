@@ -11,9 +11,6 @@ module.exports = async (client) => {
     case client.config.master.id:
       client.env = "master";
       break;
-    case client.config.beta.id:
-      client.env = "beta";
-      break;
     default:
       client.env = "alpha";
       break;

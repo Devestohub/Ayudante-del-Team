@@ -1,7 +1,7 @@
 // Author: Devestoguy <devestoguy@gmail.com>
 // Ayudante del Team (c) 2020
 // Created: 27/6/2020 12:30:26
-// Modified: 3/8/2020 20:57:12
+// Modified: 6/8/2020 15:10:27
 
 const { Api, version } = require('@hugovidafe/useful-api')
 const { MessageEmbed } = require('discord.js')
@@ -20,9 +20,6 @@ module.exports = async (client, message) => {
     case 'master':
       client.confenv = client.config.master
       break;
-    case 'beta':
-      client.confenv = client.config.beta
-      break;
     case 'alpha':
       client.confenv = client.config.alpha
       break;
@@ -34,8 +31,7 @@ module.exports = async (client, message) => {
     client.confenv.prefix == client.config.master.prefix &&
     !new RegExp(`^<@!?${client.user.id}>`).test(message.content)
   ) {
-    if (client.env == 'beta'? message.channel.members.has(client.config.master.id)? true: false: false) return;
-    if (client.env == 'alpha'? message.channel.members.has(client.config.master.id) || message.channel.members.has(client.config.beta.id)? true: false: false) return;
+    if (client.env == 'alpha'? message.channel.members.has(client.config.master.id)? true: false: false) return;
   }
 
   // Prefixes
