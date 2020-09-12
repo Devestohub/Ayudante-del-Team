@@ -1,7 +1,7 @@
 // Author: Devestoguy <devestoguy@gmail.com>
 // Ayudante del Team (c) 2020
 // Created: 27/6/2020 12:30:3
-// Modified: 9/7/2020 14:38:30
+// Modified: 12/9/2020 14:36:7
 
 module.exports = {
   name: 'help',
@@ -17,7 +17,7 @@ module.exports = {
         description: API.langs.__('commands.help.embed.description'),
         fields: [],
         timestamp: new Date(),
-        footer: { text: "© " + new Date().getFullYear() + " " + API.langs.__('bot.name'), icon_url: client.user.displayAvatarURL() }
+        footer: { text: "© " + new Date().getFullYear() + " " + client.user.username, icon_url: client.user.displayAvatarURL() }
       }
 
       const categories = {}
