@@ -28,7 +28,7 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "iso-639-1": "^2.1.4",
-    "moment": "^2.28.0",
+    "moment": "^2.29.0",
     "moment-duration-format": "^2.3.2",
     "pm2": "^4.4.1",
     "twitch-api-v5": "^2.0.4",
