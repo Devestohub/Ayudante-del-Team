@@ -1,13 +1,13 @@
 {
   "files.exclude": {
-    "package-lock.json": true,
-    "node_modules": true,
-    ".git": true,
-    "ecosystem.config.js": true,
-    ".gitignore": true,
-    ".vscode": true,
-    ".mergify.yml": true,
-    ".github": true
+    "package-lock.json": false,
+    "node_modules": false,
+    ".git": false,
+    "ecosystem.config.js": false,
+    ".gitignore": false,
+    ".vscode": false,
+    ".mergify.yml": false,
+    ".github": false
   },
-  "workspace.isHidden": true
+  "workspace.isHidden": false
 }

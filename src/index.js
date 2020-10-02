@@ -1,7 +1,7 @@
 // Author: Devestoguy <devestoguy@gmail.com>
 // Ayudante del Team (c) 2020
 // Created: 27/6/2020 11:13:38
-// Modified: 3/8/2020 19:10:36
+// Modified: 2/10/2020 15:18:9
 
 const fs = require('fs');
 const { Client, Collection } = require('discord.js');
@@ -15,20 +15,20 @@ app.get('/', (req, res) => {
   res.send('¡El auydante del Team está encendido!');
 });
 
-app.get('/folders/*', (req, res) => {
-  const files = [];
-  fs.readdirSync(__dirname + '/' + req.params[0]).forEach((file) => {
-    files.push(file);
-  });
-  res.send(files.join('\n'));
-});
+// app.get('/folders/*', (req, res) => {
+//   const files = [];
+//   fs.readdirSync(__dirname + '/' + req.params[0]).forEach((file) => {
+//     files.push(file);
+//   });
+//   res.send(files.join('\n'));
+// });
 
 const client = new Client();
 client.commands = new Collection();
 client.config = require('./database/config.json');
 client.env = '';
 client.dirname = __dirname;
-client.twitch = require('twitch-api-v5');
+// client.twitch = require('twitch-api-v5');
 
 const commandFiles = fs
   .readdirSync(__dirname + '/commands')
