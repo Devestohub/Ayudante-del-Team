@@ -1,0 +1,13 @@
+{
+  "files.exclude": {
+    "package-lock.json": false,
+    "node_modules": false,
+    ".git": false,
+    "ecosystem.config.js": false,
+    ".gitignore": false,
+    ".vscode": false,
+    ".mergify.yml": false,
+    ".github": false
+  },
+  "workspace.isHidden": false
+}
