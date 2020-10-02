@@ -1,14 +1,16 @@
 // Author: Devestoguy <devestoguy@gmail.com>
 // Ayudante del Team (c) 2020
 // Created: 27/6/2020 12:30:26
-// Modified: 6/8/2020 15:10:27
+// Modified: 2/10/2020 21:38:29
 
 const { Api, version } = require('@hugovidafe/useful-api');
 const { MessageEmbed } = require('discord.js');
 const ISO6391 = require('iso-639-1');
 
 const roles = {
-  applications: { ayudante: ['Developer', 'Team', 'User'] },
+  applications: {
+    ayudante: ['Developer', 'Team', 'User'],
+  },
   profiles: {
     Developer: ['ayudante.*'],
     Team: ['ayudante.Team', 'ayudante.User'],
@@ -20,7 +22,7 @@ module.exports = async (client, message) => {
   if (message.author.bot || message.author.system) return;
   const server = client.guilds.cache.get(client.config.guild);
 
-  // API / Databases
+  // API / Base de datos
   const API = new Api({
     path_langs: `${client.dirname}/database/i18n`,
     roles: roles,
@@ -51,7 +53,7 @@ module.exports = async (client, message) => {
       return;
   }
 
-  // Prefixes
+  // Prefijos
   const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const mentionRegex = new RegExp(`^(<@!?${client.user.id}>)\\s*`);
   const prefixRegex = client.confenv.prefix
@@ -71,7 +73,7 @@ module.exports = async (client, message) => {
       : matchedPrefix;
   } else return;
 
-  // LANGS
+  // Idiomas
   const i18n = require('fs')
     .readdirSync(`${client.dirname}/database/i18n`)
     .filter((file) => file.endsWith('.json') && !file.startsWith('.'));
@@ -91,7 +93,7 @@ module.exports = async (client, message) => {
     })
     .join(`\n`);
 
-  // Check if the bot can send messages
+  // Comprueba si el bot puede enviar un mensaje
   if (
     message.channel.type !== 'dm' &&
     !message.guild.members.cache
@@ -123,6 +125,7 @@ module.exports = async (client, message) => {
         )
     );
 
+  // Comprueba el comando
   const commandName = args.shift().toLowerCase();
   const command =
     client.commands.get(commandName) ||
@@ -130,7 +133,10 @@ module.exports = async (client, message) => {
       (cmd) => cmd.aliases && cmd.aliases.includes(commandName)
     );
 
+  // Establece el idioma al español
   API.langs.setLocale('es');
+
+  // Envia el mensaje de desarrollo
   message.channel
     .send(
       new MessageEmbed()
@@ -152,6 +158,7 @@ module.exports = async (client, message) => {
       }, 8000)
     );
 
+  // Si el comando no existe
   if (!command)
     return message.channel.send(
       new MessageEmbed()
@@ -171,7 +178,7 @@ module.exports = async (client, message) => {
         )
     );
 
-  // GET ROLE OF THE MEMBER
+  // Recoje el rol del usuario
   var roleMember = 'User';
   if (
     server.members.cache.has(message.author.id) &&
@@ -205,6 +212,7 @@ module.exports = async (client, message) => {
       );
   }
 
+  // Falta de argumentos
   if (command.args && !args.length) {
     if (command.usage) {
       return message.channel.send(
