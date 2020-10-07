@@ -32,7 +32,7 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "iso-639-1": "^2.1.4",
-    "moment": "^2.29.0",
+    "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
     "pm2": "^4.5.0",
     "util": "^0.12.3"
