@@ -34,7 +34,7 @@
     "iso-639-1": "^2.1.4",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
-    "pm2": "^4.5.0",
+    "pm2": "^4.5.1",
     "util": "^0.12.3"
   },
   "devDependencies": {}
