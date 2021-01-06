@@ -1,41 +1,41 @@
 {
-  "name": "ayudante-del-team",
-  "version": "0.2.3",
-  "description": "Ayudante del Team para el servidor de Discord \"Devestohub\"",
-  "main": "src/index.js",
-  "scripts": {
-    "improve": "npm install && prettier --config ./.vscode/.prettierrc --write .",
-    "start": "pm2-runtime start ecosystem.config.js --env production",
-    "sync": "npm run improve && git add . && git commit -am \"New update!\" && git push",
-    "test": "npm run improve && pm2-runtime start ecosystem.config.js --env production"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Devestohub/Ayudante-del-Team.git"
-  },
-  "keywords": [
-    "Discord"
-  ],
-  "author": "Devestoguy <devestoguy@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Devestohub/Ayudante-del-Team/issues"
-  },
-  "homepage": "https://github.com/Devestohub/Ayudante-del-Team#readme",
-  "dependencies": {
-    "@google-cloud/firestore": "^4.8.1",
-    "@hugovidafe/useful-api": "^0.6.7",
-    "child_process": "^1.0.2",
-    "discord.js": "^12.5.1",
-    "dotenv": "^8.2.0",
-    "download-git-repo": "^3.0.2",
-    "express": "^4.17.1",
-    "fs": "0.0.1-security",
-    "iso-639-1": "^2.1.5",
-    "moment": "^2.29.1",
-    "moment-duration-format": "^2.3.2",
-    "pm2": "^4.5.1",
-    "util": "^0.12.3"
-  },
-  "devDependencies": {}
+    "name": "ayudante-del-team",
+    "version": "0.2.4",
+    "description": "Ayudante del Team para el servidor de Discord \"Devestohub\"",
+    "main": "src/index.js",
+    "scripts": {
+        "improve": "npm install && prettier --config ./.vscode/.prettierrc --write .",
+        "start": "pm2-runtime start ecosystem.config.js --env production",
+        "sync": "npm run improve && git add . && git commit -am \"New update!\" && git push",
+        "test": "npm run improve && pm2-runtime start ecosystem.config.js --env production"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Devestohub/Ayudante-del-Team.git"
+    },
+    "keywords": [
+        "Discord"
+    ],
+    "author": "Devestoguy <devestoguy@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Devestohub/Ayudante-del-Team/issues"
+    },
+    "homepage": "https://github.com/Devestohub/Ayudante-del-Team#readme",
+    "dependencies": {
+        "@google-cloud/firestore": "^4.8.1",
+        "@hugovidafe/useful-api": "^0.6.7",
+        "child_process": "^1.0.2",
+        "discord.js": "^12.5.1",
+        "dotenv": "^8.2.0",
+        "download-git-repo": "^3.0.2",
+        "express": "^4.17.1",
+        "fs": "0.0.1-security",
+        "iso-639-1": "^2.1.5",
+        "moment": "^2.29.1",
+        "moment-duration-format": "^2.3.2",
+        "pm2": "^4.5.1",
+        "util": "^0.12.3"
+    },
+    "devDependencies": {}
 }
