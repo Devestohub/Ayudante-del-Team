@@ -1,0 +1,11 @@
+name: Manual workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Autoupdate
+        uses: siarheidudko/autoupdater@v1
