@@ -1,6 +1,6 @@
 {
   "name": "ayudante-del-team",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Ayudante del Team para el servidor de Discord \"Devestohub\"",
   "main": "src/index.js",
   "scripts": {
@@ -30,7 +30,6 @@
     "dotenv": "^8.2.0",
     "download-git-repo": "^3.0.2",
     "express": "^4.17.1",
-    "fs": "0.0.1-security",
     "iso-639-1": "^2.1.8",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
