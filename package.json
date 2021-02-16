@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/Devestohub/Ayudante-del-Team#readme",
   "dependencies": {
-    "@google-cloud/firestore": "^4.9.3",
+    "@google-cloud/firestore": "^4.9.4",
     "@hugovidafe/useful-api": "^0.6.7",
     "child_process": "^1.0.2",
     "discord.js": "^12.5.1",
