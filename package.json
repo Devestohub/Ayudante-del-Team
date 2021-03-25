@@ -30,7 +30,7 @@
     "dotenv": "^8.2.0",
     "download-git-repo": "^3.0.2",
     "express": "^4.17.1",
-    "iso-639-1": "^2.1.8",
+    "iso-639-1": "^2.1.9",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
     "util": "^0.12.3"
