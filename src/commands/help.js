@@ -1,7 +1,6 @@
 // Author: Devestoguy <devestoguy@gmail.com>
-// Ayudante del Team (c) 2020
-// Created: 27/6/2020 12:30:3
-// Modified: 2/4/2021 22:57:36
+// Ayudante-del-Team (c) 2021
+// Created: 06/27/2020 12:30:3
 
 module.exports = {
   name: 'help',

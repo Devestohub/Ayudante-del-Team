@@ -1,7 +1,6 @@
 // Author: Devestoguy <devestoguy@gmail.com>
-// Ayudante del Team (c) 2020
-// Created: 28/6/2020 12:9:44
-// Modified: 8/7/2020 17:31:47
+// Ayudante-del-Team (c) 2021
+// Created: 06/28/2020 12:9:44
 
 const moment = require('moment');
 require('moment-duration-format');

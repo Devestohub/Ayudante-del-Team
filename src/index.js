@@ -1,16 +1,14 @@
 // Author: Devestoguy <devestoguy@gmail.com>
-// Ayudante del Team (c) 2020
-// Created: 27/6/2020 11:13:38
-// Modified: 2/4/2021 22:49:21
+// Ayudante-del-Team (c) 2021
+// Created: 06/27/2020 11:13:38
 
 const fs = require('fs');
 const { Client, Collection } = require('discord.js');
-require('dotenv').config();
 
 const client = new Client();
 client.commands = new Collection();
 client.config = require('./database/config.json');
-client.env = '';
+client.env = process.env.NODE_ENV;
 client.dirname = __dirname;
 
 const commandFiles = fs

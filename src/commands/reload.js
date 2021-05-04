@@ -1,7 +1,6 @@
 // Author: Devestoguy <devestoguy@gmail.com>
-// Ayudante del Team (c) 2020
-// Created: 27/6/2020 12:30:11
-// Modified: 2/4/2021 23:18:48
+// Ayudante-del-Team (c) 2021
+// Created: 06/27/2020 12:30:11
 
 module.exports = {
   name: 'reload',
