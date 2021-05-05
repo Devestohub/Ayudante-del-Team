@@ -1,11 +1,9 @@
 // Author: Devestoguy <devestoguy@gmail.com>
 // Ayudante-del-Team (c) 2021
-// Created: 05/05/2021 01:18
+// Created: 05/05/2021 01:17
 
 module.exports = {
-  name: '?',
-  args: true,
-  usage: '[args]',
-  perm: '?',
+  name: 'follow',
+  perm: 'User',
   execute(message, embed, { client, args, API, prefixUsed, version }) {},
 };

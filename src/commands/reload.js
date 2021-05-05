@@ -1,7 +1,6 @@
 // Author: Devestoguy <devestoguy@gmail.com>
-// Ayudante del Team (c) 2020
-// Created: 27/6/2020 12:30:11
-// Modified: 15/7/2020 8:23:17
+// Ayudante-del-Team (c) 2021
+// Created: 06/27/2020 12:30:11
 
 module.exports = {
   name: 'reload',
@@ -34,9 +33,11 @@ module.exports = {
 
     if (args[0].toLowerCase() == 'locale') {
       return require('download-git-repo')(
-        `github:Devestohub/Ayudante-del-team-Translations#${client.env}`,
+        `github:Devestohub/Ayudante-del-team-Translations`,
         'src/database/i18n',
         function (err) {
+          if (err)
+            console.log('🚀 ~ file: reload.js ~ line 40 ~ execute ~ err', err);
           message.channel.send(
             embed
               .setColor(err ? '#be1931' : '#77b255')
