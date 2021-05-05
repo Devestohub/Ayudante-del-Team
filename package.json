@@ -1,6 +1,6 @@
 {
   "name": "ayudante-del-team",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Ayudante del Team para el servidor de Discord \"Devestohub\"",
   "main": "src/index.js",
   "scripts": {
