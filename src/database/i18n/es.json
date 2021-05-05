@@ -92,12 +92,12 @@
     "info": {
       "description": "Descubre información del bot",
       "embed": {
-        "title": "Información perturbadora",
-        "description": "Consulta qué perturbante es esta información",
+        "title": "Información",
+        "description": "Consulta información sobre mi UwU",
         "fields": {
           "versions": {
             "name": "Versiones",
-            "value": "Bot y api: {{botVersion}}\nDiscord.js: {{discordJsVersion}}\nNodeJS - npm: {{systemVersion}}"
+            "value": "Bot y api: {{botVersion}}\nDiscord.js: {{discordJsVersion}}\nNodeJS: {{systemVersion}}"
           },
           "systemStatistics": "Estadísticas del sistema",
           "within": {
@@ -105,7 +105,7 @@
           },
           "using": {
             "name": "usando...",
-            "value": "{{RAM}}% de RAM"
+            "value": "{{RAM}}MB de RAM"
           },
           "running": {
             "name": "durante..."
