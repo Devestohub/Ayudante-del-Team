@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/Devestohub/Ayudante-del-Team#readme",
   "dependencies": {
-    "@google-cloud/firestore": "^4.10.1",
     "@hugovidafe/useful-api": "^0.6.7",
     "discord.js": "^12.5.3",
     "dotenv": "^8.2.0",
@@ -31,7 +30,6 @@
     "iso-639-1": "^2.1.9",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
-    "util": "^0.12.3",
-    "wokcommands": "^1.3.5"
+    "util": "^0.12.3"
   }
 }
