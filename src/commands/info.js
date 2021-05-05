@@ -1,9 +1,16 @@
 // Author: Devestoguy <devestoguy@gmail.com>
-// Ayudante-del-Team (c) 2021
-// Created: 06/28/2020 12:9:44
+// Ayudante del Team (c) 2020
+// Created: 28/6/2020 12:9:44
+// Modified: 8/7/2020 17:31:47
 
 const moment = require('moment');
 require('moment-duration-format');
+const os = require('os');
+
+require('child_process').exec('npm -v', { windowsHide: true }, readVersion);
+function readVersion(err, stdout) {
+  versionnpm = stdout;
+}
 
 module.exports = {
   name: 'info',
@@ -57,7 +64,7 @@ module.exports = {
                     require('../../package.json').version
                   }__ - __v${require('@hugovidafe/useful-api').version}__*`,
                   discordJsVersion: `*__v${require('discord.js').version}__*`,
-                  systemVersion: `*__${process.version}__*`,
+                  systemVersion: `*__${process.version}__ - __v${versionnpm}__*`,
                 }
               )}`,
               inline: true,
@@ -80,13 +87,16 @@ module.exports = {
             },
             {
               name: API.langs.__('commands.info.embed.fields.within.name'),
-              value: `${process.platform} ${process.arch}`,
+              value: `${os.platform()} ${os.arch()}`,
               inline: true,
             },
             {
               name: API.langs.__('commands.info.embed.fields.using.name'),
               value: API.langs.__('commands.info.embed.fields.using.value', {
-                RAM: (process.memoryUsage().heapUsed / 1000000).toFixed(2),
+                RAM: (
+                  100 -
+                  ((os.totalmem() - os.freemem()) / os.totalmem()) * 100
+                ).toFixed(2),
               }),
               inline: true,
             },

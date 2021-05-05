@@ -1,6 +1,7 @@
 // Author: Devestoguy <devestoguy@gmail.com>
-// Ayudante-del-Team (c) 2021
-// Created: 06/27/2020 12:30:26
+// Ayudante del Team (c) 2020
+// Created: 27/6/2020 12:30:26
+// Modified: 2/10/2020 21:38:29
 
 const { Api, version } = require('@hugovidafe/useful-api');
 const { MessageEmbed } = require('discord.js');
