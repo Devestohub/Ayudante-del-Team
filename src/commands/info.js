@@ -4,12 +4,6 @@
 
 const moment = require('moment');
 require('moment-duration-format');
-const os = require('os');
-
-require('child_process').exec('npm -v', { windowsHide: true }, readVersion);
-function readVersion(err, stdout) {
-  versionnpm = stdout;
-}
 
 module.exports = {
   name: 'info',
@@ -63,7 +57,7 @@ module.exports = {
                     require('../../package.json').version
                   }__ - __v${require('@hugovidafe/useful-api').version}__*`,
                   discordJsVersion: `*__v${require('discord.js').version}__*`,
-                  systemVersion: `*__${process.version}__ - __v${versionnpm}__*`,
+                  systemVersion: `*__${process.version}__*`,
                 }
               )}`,
               inline: true,
@@ -86,16 +80,13 @@ module.exports = {
             },
             {
               name: API.langs.__('commands.info.embed.fields.within.name'),
-              value: `${os.platform()} ${os.arch()}`,
+              value: `${process.platform} ${process.arch}`,
               inline: true,
             },
             {
               name: API.langs.__('commands.info.embed.fields.using.name'),
               value: API.langs.__('commands.info.embed.fields.using.value', {
-                RAM: (
-                  100 -
-                  ((os.totalmem() - os.freemem()) / os.totalmem()) * 100
-                ).toFixed(2),
+                RAM: (process.memoryUsage().heapUsed / 1000000).toFixed(2),
               }),
               inline: true,
             },
