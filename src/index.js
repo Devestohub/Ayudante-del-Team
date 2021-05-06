@@ -2,32 +2,51 @@
 // Ayudante-del-Team (c) 2021
 // Created: 06/27/2020 11:13:38
 
-const fs = require('fs');
-const { Client, Collection } = require('discord.js');
+const { Client } = require('discord.js');
+const WOKCommands = require('wokcommands');
 
-const client = new Client();
-client.commands = new Collection();
-client.config = require('./database/config.json');
-client.env = process.env.NODE_ENV;
-client.dirname = __dirname;
+const portAudio = require('naudiodon');
 
-const commandFiles = fs
-  .readdirSync(__dirname + '/commands')
-  .filter((file) => file.endsWith('.js') && !file.startsWith('.'));
+const client = new Client({
+  partials: ['MESSAGE', 'REACTION'],
+});
 
-for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  client.commands.set(command.name, command);
-}
+client.on('ready', () => {
+  console.log(`${process.env.NODE_ENV} ${client.user.tag} / ${client.user.id}`);
 
-const eventFiles = fs
-  .readdirSync(__dirname + '/events')
-  .filter((file) => file.endsWith('.js') && !file.startsWith('.'));
+  client.user.setPresence({
+    status: 'dnd',
+    activity: { name: 'iniciarse...', type: 'PLAYING' },
+  });
 
-for (const file of eventFiles) {
-  const event = require(`./events/${file}`);
-  eventName = file.split('.').slice(0, -1).join('.');
-  client.on(eventName, event.bind(null, client));
-}
+  new WOKCommands(client, {
+    commandsDir: 'commands',
+    featuresDir: 'features',
+    defaultLanguage: 'spanish',
+    ignoreBots: true,
+    disabledDefaultCommands: [
+      'help',
+      'command',
+      'language',
+      'prefix',
+      'requiredrole',
+    ],
+  })
+    .setDisplayName('Ayudante del Team α')
+    .setBotOwner('324449297951096834')
+    .setDefaultPrefix('1.')
+    .setColor(0x7289da);
+
+  // 5 SECONDS
+  setTimeout(function () {
+    client.user.setPresence({
+      status: 'idle',
+      activity: { name: 'Team Hugo', type: 'WATCHING' },
+    });
+    // Join "Team Hugo" voice channel
+    const conn = client.channels.cache.get('839634277071323166').join();
+    conn.play();
+  }, 5000);
+});
 
 client.login(process.env.TOKEN);

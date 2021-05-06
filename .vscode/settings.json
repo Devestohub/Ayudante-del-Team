@@ -18,5 +18,6 @@
   "powerHeader.variables": [
     "!createddate!=\"$CURRENT_MONTH/$CURRENT_DATE/$CURRENT_YEAR $CURRENT_HOUR:$CURRENT_MINUTE\""
   ],
-  "powerHeader.update.content": []
+  "powerHeader.update.content": [],
+  "cSpell.words": ["evaled", "requiredrole", "wokcommands"]
 }
