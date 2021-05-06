@@ -5,13 +5,11 @@
 const { Client } = require('discord.js');
 const WOKCommands = require('wokcommands');
 
-const portAudio = require('naudiodon');
-
 const client = new Client({
-  partials: ['MESSAGE', 'REACTION'],
+  partials: ['CHANNEL', 'GUILD_MEMBER', 'MESSAGE', 'REACTION', 'USER'],
 });
 
-client.on('ready', () => {
+client.on('ready', async () => {
   console.log(`${process.env.NODE_ENV} ${client.user.tag} / ${client.user.id}`);
 
   client.user.setPresence({
@@ -23,6 +21,7 @@ client.on('ready', () => {
     commandsDir: 'commands',
     featuresDir: 'features',
     defaultLanguage: 'spanish',
+    showWarns: false,
     ignoreBots: true,
     disabledDefaultCommands: [
       'help',
@@ -38,14 +37,13 @@ client.on('ready', () => {
     .setColor(0x7289da);
 
   // 5 SECONDS
-  setTimeout(function () {
+  setTimeout(async function () {
     client.user.setPresence({
       status: 'idle',
       activity: { name: 'Team Hugo', type: 'WATCHING' },
     });
-    // Join "Team Hugo" voice channel
-    const conn = client.channels.cache.get('839634277071323166').join();
-    conn.play();
+    // TODO! ~ modules/music.js ~ CHECK!
+    require('./modules/music');
   }, 5000);
 });
 

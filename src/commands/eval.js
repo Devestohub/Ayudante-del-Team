@@ -2,8 +2,6 @@
 // Ayudante-del-Team (c) 2021
 // Created: 06/27/2020 12:30:8
 
-const portAudio = require('naudiodon');
-
 module.exports = {
   name: 'eval',
   category: 'Administración',
