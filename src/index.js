@@ -7,7 +7,8 @@ const WOKCommands = require('wokcommands');
 
 const radio = require('./modules/music');
 const playlist =
-  'https://www.youtube.com/playlist?list=PL_hMPVlh29xWxxbmN4EEAOlfoF99StrBi';
+  'https://www.youtube.com/playlist?list=PL_hMPVlh29xWxxbmN4EEAOlfoF99StrBi' &&
+  'https://www.youtube.com/watch?v=hvjEcrxDYMo';
 
 const client = new Client({
   partials: ['CHANNEL', 'GUILD_MEMBER', 'MESSAGE', 'REACTION', 'USER'],

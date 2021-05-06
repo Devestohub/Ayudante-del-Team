@@ -8,6 +8,8 @@
 const EventEmitter = require('events');
 const radio = new EventEmitter();
 
+const songsFromYTPlaylist = require('../utils/songsFromYTPlaylist');
+
 const ytdl = require('ytdl-core');
 
 var settings = {
@@ -22,27 +24,27 @@ var settings = {
 var queue = new Array();
 
 radio.on('ready', async ({ conn, url }) => {
-  // Detect if the url is a playlist
-  const pl_regExp = /^.*(youtu.be\/|list=)([^#\&\?]*).*/;
-  const pl_match = url.match(pl_regExp);
-  const pl_id = pl_match ? pl_match[2] : null;
-  // Extract songs from a playlist
-  pl_id ? () => {} : () => {};
+  // Detect if the url is a YouTube playlist
+  const plYT_regExp = /^.*(youtu.be\/|list=)([^#\&\?]*).*/;
+  const plYT_match = url.match(plYT_regExp);
+  const plYT_id = plYT_match ? plYT_match[2] : null;
+  // Detect if the usl is a YouTube video
+  const YT_regExp = /(http:|https:)?(\/\/)?(www\.)?(youtube.com|youtu.be)\/(watch|embed)?(\?v=|\/)?(\S+)?/;
+  const YT_match = url.match(YT_regExp);
+  const YT_id = YT_match ? YT_match[1] : null;
+  // Add song or playlist songs to the queue!
+  plYT_id
+    ? (await songsFromYTPlaylist({ id: plYT_id })).forEach((song) =>
+        queue.push(song)
+      )
+    : () => {
+        queue.push('https://www.youtube.com/watch?v=' + YT_id);
+      };
 });
 
+radio.on('', () => {});
+
 radio.on('start', async ({ client }) => {
-  // * https://github.com/timeforaninja/node-ytpl/blob/master/example/example_output.txt
-  await ytpl(
-    'https://www.youtube.com/playlist?list=PL_hMPVlh29xWxxbmN4EEAOlfoF99StrBi'
-  )
-    .then((pl) => {
-      const { items } = pl;
-      items.forEach((item) => {
-        queue.push(({ index, shortUrl, title } = item));
-        console.log(queue);
-      });
-    })
-    .finally(() => {});
   // Do a queue
   conn.play(
     ytdl(
