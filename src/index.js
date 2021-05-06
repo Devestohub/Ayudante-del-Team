@@ -5,6 +5,10 @@
 const { Client } = require('discord.js');
 const WOKCommands = require('wokcommands');
 
+const radio = require('./modules/music');
+const playlist =
+  'https://www.youtube.com/playlist?list=PL_hMPVlh29xWxxbmN4EEAOlfoF99StrBi';
+
 const client = new Client({
   partials: ['CHANNEL', 'GUILD_MEMBER', 'MESSAGE', 'REACTION', 'USER'],
 });
@@ -37,13 +41,17 @@ client.on('ready', async () => {
     .setColor(0x7289da);
 
   // 5 SECONDS
-  setTimeout(async function () {
+  setTimeout(async () => {
     client.user.setPresence({
       status: 'idle',
       activity: { name: 'Team Hugo', type: 'WATCHING' },
     });
     // TODO! ~ modules/music.js ~ CHECK!
-    require('./modules/music');
+    // Join "Team Hugo" voice channel
+    await client.channels.cache
+      .get('839634277071323166')
+      .join()
+      .then((conn) => radio.emit('ready', { conn, url: playlist }));
   }, 5000);
 });
 
