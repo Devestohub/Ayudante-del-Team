@@ -8,7 +8,7 @@
 const EventEmitter = require('events');
 const radio = new EventEmitter();
 
-const songsFromYTPlaylist = require('../utils/songsFromYTPlaylist');
+const YTmusic = require('../utils/YTmusic');
 
 const ytdl = require('ytdl-core');
 
@@ -24,25 +24,27 @@ var settings = {
 var queue = new Array();
 
 radio.on('ready', async ({ conn, url }) => {
-  // Detect if the url is a YouTube playlist
-  const plYT_regExp = /^.*(youtu.be\/|list=)([^#\&\?]*).*/;
-  const plYT_match = url.match(plYT_regExp);
-  const plYT_id = plYT_match ? plYT_match[2] : null;
-  // Detect if the usl is a YouTube video
-  const YT_regExp = /(http:|https:)?(\/\/)?(www\.)?(youtube.com|youtu.be)\/(watch|embed)?(\?v=|\/)?(\S+)?/;
-  const YT_match = url.match(YT_regExp);
-  const YT_id = YT_match ? YT_match[1] : null;
-  // Add song or playlist songs to the queue!
-  plYT_id
-    ? (await songsFromYTPlaylist({ id: plYT_id })).forEach((song) =>
-        queue.push(song)
-      )
-    : () => {
-        queue.push('https://www.youtube.com/watch?v=' + YT_id);
-      };
+  // Check if the url is from YT and return a JSON with if is a playlist or video and more!
+  const info = await new YTmusic().isYT({ url });
+  /**
+   * {
+   *  type: 'playlist',
+   *  id: 'PL_hMPVlh29xWxxbmN4EEAOlfoF99StrBi',
+   *  url: 'https://www.youtube.com/playlist?list=PL_hMPVlh29xWxxbmN4EEAOlfoF99StrBi' // * This is gonna to be removed, bc we are gonna do a constructor URL (i.e. URL prettier)
+   * }
+   */
+
+  // TODO! Constructor URL (i.e. URL prettier)
+
+  // TODO! Add song or playlist songs to the queue!
+  // plYT_id
+  //   ? (await YTmusic({ id: plYT_id })).forEach((song) => queue.push(song))
+  //   : () => {
+  //       queue.push('https://www.youtube.com/watch?v=' + YT_id);
+  //     };
 });
 
-radio.on('', () => {});
+// TODO! Add an add event to add songs to the queue
 
 radio.on('start', async ({ client }) => {
   // Do a queue
