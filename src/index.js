@@ -1,54 +1,60 @@
 // Author: Devestoguy <devestoguy@gmail.com>
-// Ayudante del Team (c) 2020
-// Created: 27/6/2020 11:13:38
-// Modified: 2/10/2020 15:18:9
+// Ayudante-del-Team (c) 2021
+// Created: 06/27/2020 11:13:38
 
-const fs = require('fs');
-const { Client, Collection } = require('discord.js');
-require('dotenv').config();
+const { Client } = require('discord.js');
+const WOKCommands = require('wokcommands');
 
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 5000;
+const radio = require('./modules/music');
+const playlist =
+  'https://www.youtube.com/playlist?list=PL_hMPVlh29xWxxbmN4EEAOlfoF99StrBi';
+// 'https://www.youtube.com/watch?v=hvjEcrxDYMo';
+// 'https://www.youtube.com/watch?v=Vn-0I1oVJaI&list=PLzFAeWDx-TrJy469URc9rcNE7yTGwqJC4&index=5&t=239s';
 
-app.get('/', (req, res) => {
-  res.send('¡El auydante del Team está encendido!');
+const client = new Client({
+  partials: ['CHANNEL', 'GUILD_MEMBER', 'MESSAGE', 'REACTION', 'USER'],
 });
 
-// app.get('/folders/*', (req, res) => {
-//   const files = [];
-//   fs.readdirSync(__dirname + '/' + req.params[0]).forEach((file) => {
-//     files.push(file);
-//   });
-//   res.send(files.join('\n'));
-// });
+client.on('ready', async () => {
+  console.log(`${process.env.NODE_ENV} ${client.user.tag} / ${client.user.id}`);
 
-const client = new Client();
-client.commands = new Collection();
-client.config = require('./database/config.json');
-client.env = '';
-client.dirname = __dirname;
-// client.twitch = require('twitch-api-v5');
+  client.user.setPresence({
+    status: 'dnd',
+    activity: { name: 'iniciarse...', type: 'PLAYING' },
+  });
 
-const commandFiles = fs
-  .readdirSync(__dirname + '/commands')
-  .filter((file) => file.endsWith('.js') && !file.startsWith('.'));
+  new WOKCommands(client, {
+    commandsDir: 'commands',
+    featuresDir: 'features',
+    defaultLanguage: 'spanish',
+    showWarns: false,
+    ignoreBots: true,
+    disabledDefaultCommands: [
+      'help',
+      'command',
+      'language',
+      'prefix',
+      'requiredrole',
+    ],
+  })
+    .setDisplayName('Ayudante del Team α')
+    .setBotOwner('324449297951096834')
+    .setDefaultPrefix('1.')
+    .setColor(0x7289da);
 
-for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  client.commands.set(command.name, command);
-}
-
-const eventFiles = fs
-  .readdirSync(__dirname + '/events')
-  .filter((file) => file.endsWith('.js') && !file.startsWith('.'));
-
-for (const file of eventFiles) {
-  const event = require(`./events/${file}`);
-  eventName = file.split('.').slice(0, -1).join('.');
-  client.on(eventName, event.bind(null, client));
-}
-
-app.listen(port);
+  // 5 SECONDS
+  setTimeout(async () => {
+    client.user.setPresence({
+      status: 'idle',
+      activity: { name: 'Team Hugo', type: 'WATCHING' },
+    });
+    // TODO! ~ modules/music.js ~ CHECK!
+    // Join "Team Hugo" voice channel
+    await client.channels.cache
+      .get('839634277071323166')
+      .join()
+      .then((conn) => radio.emit('ready', { conn, url: playlist }));
+  }, 5000);
+});
 
 client.login(process.env.TOKEN);

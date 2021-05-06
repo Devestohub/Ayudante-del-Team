@@ -9,5 +9,15 @@
     ".mergify.yml": false,
     ".github": false
   },
-  "workspace.isHidden": false
+  "workspace.isHidden": false,
+  "powerHeader.update.enable": "save",
+  "powerHeader.template": "file://$WORKSPACE_FOLDER/.vscode/powerheader.txt",
+  "powerHeader.commentMode": "line",
+  "powerHeader.autoInsert.languages": ["plaintext", "Log", "json", "jsonc"],
+  "powerHeader.autoInsert.enable": true,
+  "powerHeader.variables": [
+    "!createddate!=\"$CURRENT_MONTH/$CURRENT_DATE/$CURRENT_YEAR $CURRENT_HOUR:$CURRENT_MINUTE\""
+  ],
+  "powerHeader.update.content": [],
+  "cSpell.words": ["evaled", "requiredrole", "wokcommands"]
 }

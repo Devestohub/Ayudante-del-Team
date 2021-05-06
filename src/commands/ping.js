@@ -1,102 +1,37 @@
 // Author: Devestoguy <devestoguy@gmail.com>
-// Ayudante del Team (c) 2020
-// Created: 11/7/2020 13:00:8
-// Modified: 15/7/2020 8:23:21
+// Ayudante-del-Team (c) 2021
+// Created: 07/11/2020 13:00:8
+
+const { MessageEmbed } = require('discord.js');
+const locale = require('../modules/locale');
 
 module.exports = {
   name: 'ping',
-  usage: '[number of times to do ping]',
-  perm: 'User',
-  async execute(message, embed, { client, args, API, prefixUsed, version }) {
-    global.msgc = message.createdTimestamp;
-    if (!args[0] || args[0] === '1') {
-      const msg = await message.channel.send(
-        embed
-          .setColor('#7289da')
-          .setTitle(
-            ':information_source: ' + API.langs.__('commands.ping.embed.title')
-          )
-          .setDescription(API.langs.__('commands.ping.embed.description'))
-          .setTimestamp()
-          .setFooter(
-            '© ' + new Date().getFullYear() + ' ' + client.user.username,
-            client.user.displayAvatarURL()
-          )
+  aliases: ['pong', 'pingpong', 'p'],
+  category: 'General',
+  description: 'Muestra la latencia del bot con la API de Discord',
+  slash: 'both',
+  async callback({ client, message }) {
+    const reply = new MessageEmbed()
+      .setColor('#7289da')
+      .setTitle(
+        ':information_source: ' + locale.__('commands.ping.embed.title')
+      )
+      .setDescription(
+        locale.__('commands.ping.embed.description', {
+          API: Math.round(client.ws.ping),
+        })
+      )
+      .setTimestamp()
+      .setFooter(
+        '© ' + new Date().getFullYear() + ' ' + client.user.username,
+        client.user.displayAvatarURL()
       );
-      return setTimeout(function () {
-        msg.edit(
-          embed
-            .setColor('#7289da')
-            .setTitle(
-              ':information_source: ' +
-                API.langs.__('commands.ping.embedPong.title')
-            )
-            .setDescription(
-              API.langs.__('commands.ping.embedPong.description', {
-                latency: Math.floor(msg.createdTimestamp - msgc),
-                API: Math.round(client.ws.ping),
-              })
-            )
-            .setTimestamp()
-            .setFooter(
-              '© ' + new Date().getFullYear() + ' ' + client.user.username,
-              client.user.displayAvatarURL()
-            )
-        );
-      }, 1500);
+
+    if (message) {
+      message.reply(reply);
     }
-    if (isNaN(args[0]) || args[0] > 4) {
-      return message.channel.send(
-        "You don't introduce a number, or the number is more of 4, so I don't go to execute the command :D"
-      );
-    }
-    for (let i = 0; i < args[0]; i++) {
-      message.channel
-        .send(
-          embed
-            .setColor('#7289da')
-            .setTitle(
-              ':information_source: ' +
-                API.langs.__('commands.ping.embed.title')
-            )
-            .setDescription(API.langs.__('commands.ping.embed.description'))
-            .setTimestamp()
-            .setFooter(
-              '© ' + new Date().getFullYear() + ' ' + client.user.username,
-              client.user.displayAvatarURL()
-            )
-        )
-        .then((m) => {
-          setTimeout(function () {
-            m.edit(
-              embed
-                .setColor('#7289da')
-                .setTitle(
-                  ':information_source: ' +
-                    API.langs.__('commands.ping.embedPong.title')
-                )
-                .setDescription(
-                  API.langs.__('commands.ping.embedPong.description', {
-                    latency: Math.floor(m.createdTimestamp - msgc),
-                    API: Math.round(client.ws.ping),
-                  })
-                )
-                .setTimestamp()
-                .setFooter(
-                  '© ' + new Date().getFullYear() + ' ' + client.user.username,
-                  client.user.displayAvatarURL()
-                )
-            );
-            msgc = m.createdTimestamp;
-          }, 1500);
-        });
-    }
-    return message.channel
-      .send(`I finish sending ${args[0]} pongs! I win you :D`)
-      .then((m) =>
-        setTimeout(function () {
-          m.delete();
-        }, 8000)
-      );
+
+    return reply;
   },
 };

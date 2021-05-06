@@ -76,6 +76,5 @@ jspm_packages
 .env
 
 # AYUDANTE DEL TEAM
-src/database/i18n/
 developing.js
 credentials_firebase.json
