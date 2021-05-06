@@ -2,7 +2,7 @@
 // Ayudante-del-Team (c) 2021
 // Created: 05/06/2021 05:31
 
-// TODO Be able to play playlists on a voice channel.
+// TODO: Be able to play playlists on a voice channel.
 // * We're waiting for stage implement on discord.js
 
 const EventEmitter = require('events');
