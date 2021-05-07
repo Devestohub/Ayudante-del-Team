@@ -25,7 +25,7 @@ var queue = new Array();
 
 radio.on('ready', async ({ conn, url }) => {
   // Check if the url is from YT and return a JSON with if is a playlist or video and more!
-  const info = await new YTmusic().isYT({ url });
+  const info = await new YTmusic().isYT(url);
   /**
    * {
    *  type: 'playlist',
