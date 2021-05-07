@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "pm2 start ecosystem.config.js",
     "improve": "npm install && prettier --config ./.vscode/.prettierrc --write .",
-    "start": "pm2 start ecosystem.config.js --env production",
+    "start": "node .",
     "sync": "npm run improve && git add . && git commit -am \"New update!\" && git push"
   },
   "repository": {
