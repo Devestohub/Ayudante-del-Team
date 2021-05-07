@@ -10,8 +10,6 @@ const radio = new EventEmitter();
 
 const YTmusic = require('../utils/YTmusic');
 
-const ytdl = require('ytdl-core');
-
 var settings = {
   /**
    * Setting loop:
@@ -44,16 +42,13 @@ radio.on('ready', async ({ conn, url }) => {
   //     };
 });
 
-// TODO! Add an add event to add songs to the queue
+radio.on('add', (url) => {
+  return queue.push(url);
+});
 
 radio.on('start', async ({ client }) => {
   // Do a queue
-  conn.play(
-    ytdl(
-      'https://www.youtube.com/watch?v=wyNc0WtHw6I&list=PL_hMPVlh29xWxxbmN4EEAOlfoF99StrBi&index=1',
-      { filter: 'audioonly' }
-    ).on('end', radio.emit('end'))
-  );
+  conn.play();
 });
 
 radio.on('end', () => {});

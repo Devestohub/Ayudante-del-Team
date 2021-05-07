@@ -2,6 +2,9 @@
 // Ayudante-del-Team (c) 2021
 // Created: 05/06/2021 13:58
 
+const radio = require('../modules/music');
+
+const ytdl = require('ytdl-core');
 const ytpl = require('ytpl');
 
 var songs = new Array();
@@ -43,6 +46,11 @@ class YT {
       id: Pl || params.get('v'),
       url, // TODO: To remove
     };
+  }
+
+  async playYT(url) {
+    const YT = ytdl(url, { filter: 'audioonly' }).on('end', radio.emit('end'));
+    return YT;
   }
 
   // TODO! Remove this method!
