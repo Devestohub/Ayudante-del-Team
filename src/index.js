@@ -53,7 +53,9 @@ client.on('ready', async () => {
     await client.channels.cache
       .get('839634277071323166')
       .join()
-      .then((conn) => radio.emit('ready', { conn, url: playlist }));
+      .then(radio.emit('ready'))
+      .then(radio.emit('add', playlist))
+      .then((conn) => radio.emit('start', conn));
   }, 5000);
 });
 

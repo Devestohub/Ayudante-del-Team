@@ -42,6 +42,7 @@ class YT {
     const Pl = params.get('list');
     // Return the JSON with the correct information
     return {
+      isYT: true,
       type: Pl ? 'playlist' : 'video', // `playlist` or `video`
       id: Pl || params.get('v'),
       url, // TODO: To remove
@@ -49,23 +50,30 @@ class YT {
   }
 
   async playYT(url) {
-    const YT = ytdl(url, { filter: 'audioonly' }).on('end', radio.emit('end'));
-    return YT;
+    return ytdl(url, {
+      filter: 'audioonly',
+      quality: 'highestaudio',
+    });
   }
 
-  // TODO! Remove this method!
   /**
-   * @private
    * @param {*} param0
    * @returns
    */
-  async isYTPlaylist({ id }) {
+  async extractYTPlaylist(id) {
     // * https://github.com/timeforaninja/node-ytpl/blob/master/example/example_output.txt
-    await ytpl('https://www.youtube.com/playlist?list=' + id, {
+    const pl = await ytpl('https://www.youtube.com/playlist?list=' + id, {
       limit: Infinity,
-    }).then(({ items } = pl) => {
-      items.forEach(({ shortUrl } = item) => songs.push(shortUrl));
     });
+    const { items } = pl;
+    const urls = items.map((song) => song.shortUrl);
+    for (const url in urls) {
+      const song = urls[url];
+      songs.push({
+        isYT: true,
+        url: song,
+      });
+    }
     return songs;
   }
 }
