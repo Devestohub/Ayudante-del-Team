@@ -1,7 +1,6 @@
-// Author: Hugovidafe <Hugo.vidal.ferre@gmail.com>
-// Useful Api (c) 2020
-// Created: 1/7/2020 12:50:1
-// Modified: 10/9/2020 10:15:28
+// Author: Devestoguy <devestoguy@gmail.com>
+// Ayudante-del-Team (c) 2021
+// Created: 5/7/2020 13:35
 
 const i18n = require('i18n');
 const path = require('path');

@@ -56,10 +56,6 @@ class YT {
     });
   }
 
-  /**
-   * @param {*} param0
-   * @returns
-   */
   async extractYTPlaylist(id) {
     // * https://github.com/timeforaninja/node-ytpl/blob/master/example/example_output.txt
     const pl = await ytpl('https://www.youtube.com/playlist?list=' + id, {

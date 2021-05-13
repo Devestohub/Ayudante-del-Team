@@ -56,6 +56,10 @@ radio.on('start', async (conn) => {
       const { url } = queue.shift();
       return conn.play(await new YTmusic().playYT(url));
     }
+  } else if (settings.loop == 1) {
+    if (queue[i].isYT == true) {
+      
+    }
   }
   return;
 });
