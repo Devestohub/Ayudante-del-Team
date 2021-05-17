@@ -3,7 +3,7 @@
 // Created: 05/08/2021 00:12
 
 /**
- * Unify this in one string
+ * Unify everything in one string
  *
  * @param  {...any} args What do you want to unify
  * @returns {String}
