@@ -2,8 +2,10 @@
 // Ayudante-del-Team (c) 2021
 // Created: 05/17/2021 16:13
 
-const anilist = require('../modules/anilist');
 const { MessageEmbed } = require('discord.js');
+const capitalize = require('../utils/capitalize');
+
+const anilist = require('../modules/anilist');
 const { gql } = require('graphql-request');
 
 const query = gql`
@@ -21,6 +23,13 @@ const query = gql`
 							userPreferred
 						}
 						format
+						episodes
+						siteUrl
+					}
+					user {
+						avatar {
+							large
+						}
 					}
 				}
 			}
@@ -35,7 +44,6 @@ module.exports = {
 	permissions: ['ADMINISTRATOR'],
 	hidden: true,
 	async callback({ message, client }) {
-		console.log('Hi');
 		const response = await anilist(query);
 
 		if (response.error) return response;
@@ -46,32 +54,52 @@ module.exports = {
 		const status = (status) =>
 			entries.filter((entry) => entry.status == status);
 
-		console.log('🚀 ~ file: reto.js ~ line 44 ~ callback ~ data', entries);
+		const lastEntries = entries.slice(0, 8);
+		const lastUpdates = (array) => {
+			const newArr = [];
+			array.forEach((entry) =>
+				newArr.push(
+					`[${capitalize(entry.status)}] **${
+						entry.media.title.userPreferred
+					}** (${entry.media.format})\n${entry.progress}/${
+						entry.media.episodes
+					} - ${entry.media.siteUrl}`
+				)
+			);
+			return newArr.join('\n');
+		};
 
 		const reply = new MessageEmbed()
 			.setColor('#5865F2')
-			.setTitle('Reto 200 animes')
-			.addField(
-				'Completed',
-				`${status('COMPLETED').length} / ${entries.length}`,
-				true
+			.setAuthor(
+				'xXgfreecssXx',
+				client.users.cache.get('689870106716536866').avatarURL(),
+				'https://anilist.co/user/XxFreecssxX/'
+			)
+			.setTitle('**200 anime challenge**')
+			.setURL(
+				'https://anilist.co/user/XxFreecssxX/animelist/Reto%20200%20animes'
+			)
+			.setThumbnail(entries[0].user.avatar.large)
+			.setDescription(
+				'If the user successfully completes this challenge in the set time, the user will get his reward.'
 			)
 			.addField(
-				'Watching',
-				`${status('CURRENT').length} / ${
-					entries.length - status('COMPLETED').length
+				'**Status**',
+				`**✔ Completed**: ${status('COMPLETED').length}\n**👓 Watching**: ${
+					status('CURRENT').length
+				}\n**⌛ Planning**: ${status('PLANNING').length}\n**💫 Total**: ${
+					entries.length
 				}`,
 				true
 			)
 			.addField(
-				'Planning',
-				`${status('PLANNING').length} / ${
-					entries.length -
-					(status('COMPLETED').length - status('CURRENT').length)
-				}`,
+				'**Calendar**',
+				`Established time: 2 years!\n👌🏻 Not started yet`,
 				true
 			)
-			.addField('Last Updates', entries.slice(0, 5))
+			.addField('**Reward**', '💰 25€', true)
+			.addField('**Last Updates**', lastUpdates(lastEntries))
 			// .setDescription(entries)
 			.setTimestamp()
 			.setFooter(
