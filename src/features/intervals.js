@@ -6,7 +6,6 @@ const moment = require('moment');
 require('moment-duration-format');
 
 module.exports = (client) => {
-	return;
 	const server = client.guilds.cache.get('378284847048818698');
 	const sText = server.channels.cache.filter((c) => c.type == 'text').size;
 	const sVoice = server.channels.cache.filter((c) => c.type == 'voice').size;

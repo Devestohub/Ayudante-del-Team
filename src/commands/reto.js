@@ -13,9 +13,7 @@ const query = gql`
 		MediaListCollection(userId: 686048, type: ANIME, sort: UPDATED_TIME_DESC) {
 			lists {
 				name
-				isCustomList
 				entries {
-					id
 					progress
 					status
 					media {
@@ -26,12 +24,13 @@ const query = gql`
 						episodes
 						siteUrl
 					}
-					user {
-						avatar {
-							large
-						}
-					}
 				}
+			}
+			user {
+				avatar {
+					large
+				}
+				siteUrl
 			}
 		}
 	}
@@ -54,39 +53,57 @@ module.exports = {
 		const status = (status) =>
 			entries.filter((entry) => entry.status == status);
 
-		const lastEntries = entries.slice(0, 8);
-		const lastUpdates = (array) => {
-			const newArr = [];
-			array.forEach((entry) =>
-				newArr.push(
+		const lastEntries = entries
+			.slice(0, 8)
+			.map(
+				(entry) =>
 					`[${capitalize(entry.status)}] **${
 						entry.media.title.userPreferred
 					}** (${entry.media.format})\n${entry.progress}/${
 						entry.media.episodes
 					} - ${entry.media.siteUrl}`
-				)
-			);
-			return newArr.join('\n');
-		};
+			)
+			.join('\n');
+
+		const upcomingEntries = status('PLANNING')
+			.sort((a, b) =>
+				a.media.title.userPreferred > b.media.title.userPreferred
+					? 1
+					: b.media.title.userPreferred > a.media.title.userPreferred
+					? -1
+					: 0
+			)
+			.slice(0, 8)
+			.map(
+				(entry) =>
+					`⌛ **${entry.media.title.userPreferred}** (${entry.media.format})\n${entry.progress}/${entry.media.episodes} - ${entry.media.siteUrl}`
+			)
+			.join('\n');
+
+		const dateStarted = 1622045200000;
+		const dateToFinish = ((dS) => {
+			return new Date(dS.setFullYear(dS.getFullYear() + 2));
+		})(new Date(dateStarted));
+		const diffDatesInWeeks = dateToFinish - new Date();
 
 		const reply = new MessageEmbed()
 			.setColor('#5865F2')
 			.setAuthor(
 				'xXgfreecssXx',
 				client.users.cache.get('689870106716536866').avatarURL(),
-				'https://anilist.co/user/XxFreecssxX/'
+				data.user.siteUrl
 			)
 			.setTitle('**200 anime challenge**')
 			.setURL(
 				'https://anilist.co/user/XxFreecssxX/animelist/Reto%20200%20animes'
 			)
-			.setThumbnail(entries[0].user.avatar.large)
+			.setThumbnail(data.user.avatar.large)
 			.setDescription(
 				'If the user successfully completes this challenge in the set time, the user will get his reward.'
 			)
 			.addField(
 				'**Status**',
-				`**✔ Completed**: ${status('COMPLETED').length}\n**👓 Watching**: ${
+				`**✔ Completed**: ${status('COMPLETED').length}\n**👓 Current**: ${
 					status('CURRENT').length
 				}\n**⌛ Planning**: ${status('PLANNING').length}\n**💫 Total**: ${
 					entries.length
@@ -95,12 +112,16 @@ module.exports = {
 			)
 			.addField(
 				'**Calendar**',
-				`Established time: 2 years!\n👌🏻 Not started yet`,
+				`Established time: 2 years!\nStarted: ${new Date(
+					dateStarted
+				).toLocaleString()}!\nEnd before ${dateToFinish.toLocaleString()}\nRemaining: ${require('../modules/moment')(
+					diffDatesInWeeks
+				)}`,
 				true
 			)
 			.addField('**Reward**', '💰 25€', true)
-			.addField('**Last Updates**', lastUpdates(lastEntries))
-			// .setDescription(entries)
+			.addField('**Last Updates**', lastEntries)
+			.addField('**Upcoming to watch**', upcomingEntries)
 			.setTimestamp()
 			.setFooter(
 				'© ' + new Date().getFullYear() + ' ' + client.user.username,

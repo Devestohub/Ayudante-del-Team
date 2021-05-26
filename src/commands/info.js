@@ -5,9 +5,6 @@
 const locale = require('../modules/def_locale');
 const { MessageEmbed } = require('discord.js');
 
-const moment = require('moment');
-require('moment-duration-format');
-
 module.exports = {
 	name: 'info',
 	aliases: ['information', 'información', 'i'],
@@ -15,30 +12,7 @@ module.exports = {
 	description: 'Muestra información del bot',
 	slash: 'both',
 	callback({ client, message }) {
-		moment.updateLocale('en', {
-			durationLabelsStandard: {
-				s: locale.__('time.second'),
-				ss: locale.__('time.seconds'),
-				m: locale.__('time.minute'),
-				mm: locale.__('time.minutes'),
-				h: locale.__('time.hour'),
-				hh: locale.__('time.hours'),
-				d: locale.__('time.day'),
-				dd: locale.__('time.days'),
-				w: locale.__('time.week'),
-				ww: locale.__('time.weeks'),
-				M: locale.__('time.month'),
-				MM: locale.__('time.months'),
-				y: locale.__('time.year'),
-				yy: locale.__('time.years'),
-			},
-		});
-
-		const duration = moment
-			.duration(client.uptime)
-			.format(
-				`y __, M __, w __, d __, h __, m __ [${locale.__('words.and')}] s __`
-			);
+		const duration = require('../modules/moment')(client.uptime);
 
 		const reply = new MessageEmbed()
 			.setColor('#5865F2')
