@@ -9,6 +9,6 @@
  * @returns {String}
  */
 module.exports = (str) => {
-	var firstLetter = str.substr(0, 1);
-	return firstLetter.toUpperCase() + str.substr(1).toLowerCase();
+  var firstLetter = str.substr(0, 1);
+  return firstLetter.toUpperCase() + str.substr(1).toLowerCase();
 };

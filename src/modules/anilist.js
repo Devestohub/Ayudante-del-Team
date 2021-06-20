@@ -5,10 +5,10 @@
 const { GraphQLClient } = require('graphql-request');
 
 const API = new GraphQLClient('https://graphql.anilist.co', {
-	redirect: 'follow',
+  redirect: 'follow',
 });
 
 module.exports = (query, variables) =>
-	API.request(query, variables)
-		.then((data) => data)
-		.catch((error) => ({ error: error.response.errors[0] || 'Unknown Error' }));
+  API.request(query, variables)
+    .then((data) => data)
+    .catch((error) => ({ error: error.response.errors[0] || 'Unknown Error' }));
