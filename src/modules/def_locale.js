@@ -5,12 +5,12 @@
 const i18n = require('i18n');
 
 i18n.configure({
-	autoReload: true,
-	directory: require('path').resolve('src/database/i18n'),
-	defaultLocale: 'es',
-	objectNotation: true,
-	syncFiles: true,
-	updateFiles: true,
+  autoReload: true,
+  directory: require('path').resolve('src/database/i18n'),
+  defaultLocale: 'es',
+  objectNotation: true,
+  syncFiles: true,
+  updateFiles: true,
 });
 
 module.exports = i18n;
