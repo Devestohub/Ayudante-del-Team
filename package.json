@@ -1,7 +1,7 @@
 {
   "name": "ayudante-del-team",
   "version": "0.3.2",
-  "description": "Ayudante del Team para el servidor de Discord \"Devestohub\"",
+  "description": "Ayudante del Team para el servidor de Discord \"Hugovidafe\"",
   "main": "src/index.js",
   "scripts": {
     "dev": "pm2 start ecosystem.config.js",
@@ -11,17 +11,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Devestohub/Ayudante-del-Team.git"
+    "url": "git+https://github.com/Hugovidafe-OSS/Ayudante-del-Team.git"
   },
   "keywords": [
     "Discord"
   ],
-  "author": "Devestoguy <devestoguy@gmail.com>",
+  "author": "Hugovidafe-OSS <hugo.vidal.ferre@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Devestohub/Ayudante-del-Team/issues"
+    "url": "https://github.com/Hugovidafe-OSS/Ayudante-del-Team/issues"
   },
-  "homepage": "https://github.com/Devestohub/Ayudante-del-Team#readme",
+  "homepage": "https://github.com/Hugovidafe-OSS/Ayudante-del-Team#readme",
   "devDependencies": {
     "pm2": "^5.1.0"
   },

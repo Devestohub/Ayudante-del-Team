@@ -1,4 +1,4 @@
-// Author: Devestoguy <devestoguy@gmail.com>
+// Author: Hugovidafe-OSS <hugo.vidal.ferre@gmail.com>
 // Ayudante-del-Team (c) 2021
 // Created: 07/11/2020 13:00:8
 

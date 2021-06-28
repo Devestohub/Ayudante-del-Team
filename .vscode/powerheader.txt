@@ -1,1 +1,1 @@
-Author: Devestoguy <devestoguy@gmail.com>\n$WORKSPACE_NAME (c) $CURRENT_YEAR\nCreated: !createddate!
+Author: Hugovidafe-OSS <hugo.vidal.ferre@gmail.com>\n$WORKSPACE_NAME (c) $CURRENT_YEAR\nCreated: !createddate!
