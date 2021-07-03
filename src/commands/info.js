@@ -23,8 +23,7 @@ module.exports = {
       .addFields(
         {
           name:
-            '<:_gears_:529706543235465228> ' +
-            locale.__('commands.info.embed.fields.versions.name'),
+            ':gear: ' + locale.__('commands.info.embed.fields.versions.name'),
           value: `✭ ${locale.__('commands.info.embed.fields.versions.value', {
             botVersion: `*__${process.env.NODE_ENV} v${
               require('../../package.json').version
@@ -36,8 +35,7 @@ module.exports = {
         },
         {
           name:
-            '<:_staff_:529711058328354817> ' +
-            locale.__('users.roles.Developer.one'),
+            ':technologist_tone1: ' + locale.__('users.roles.Developer.one'),
           value:
             '<@324449297951096834>\nHugovidafe#2728\n`<@324449297951096834>`',
           inline: true,

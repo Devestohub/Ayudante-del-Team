@@ -8,9 +8,38 @@ const { MessageEmbed } = require('discord.js');
 const anilist = require('../modules/anilist');
 const { gql } = require('graphql-request');
 
-const query = (userName) => gql`
+const userQuery = (userName) => gql`
 	{
-		MediaListCollection(userName: "${userName}", type: ANIME, sort: UPDATED_TIME_DESC) {
+		User(name: "${userName}") {
+			id
+			name
+			about
+			avatar {
+				large
+			}
+			statistics {
+				anime {
+					count
+					meanScore
+					minutesWatched
+					episodesWatched
+				}
+				manga {
+					count
+					meanScore
+					chaptersRead
+					volumesRead
+				}
+			}
+			unreadNotificationCount
+			siteUrl
+		}
+	}
+`;
+
+const animesListQuery = (userId, sort) => gql`
+	{
+		MediaListCollection(userId: ${userId}, type: ANIME, sort: ${sort}) {
 			lists {
 				name
 				entries {
@@ -27,13 +56,6 @@ const query = (userName) => gql`
 						siteUrl
 					}
 				}
-			}
-			user {
-				name
-				avatar {
-					large
-				}
-				siteUrl
 			}
 		}
 	}
@@ -60,11 +82,11 @@ const emoji = (text) => {
 };
 
 module.exports = {
-  name: 'animechallenge',
-  aliases: ['ac', 'reto'],
+  name: 'anilist',
+  aliases: ['al'],
   category: 'Entretenimiento',
   expectedArgs: '<Anilist username> [Anilist list]',
-  description: 'Reto de Anilist',
+  description: 'Anilist',
   minArgs: 1,
   maxArgs: 3,
   hidden: true,
@@ -72,27 +94,33 @@ module.exports = {
     var episodesCompleted = 0;
     var totalEpisodes = 0;
 
-    const response = await anilist(query(args[0]));
+    const getUser = (await anilist(userQuery(args[0]))).User;
+    const getAnimesList = (
+      await anilist(animesListQuery(getUser.id, 'UPDATED_TIME_DESC'))
+    ).MediaListCollection;
 
-    if (response.error) return response;
+    const argAnimeListName = args[1] || 'AnimeChallenge';
 
-    const argAnimeList = args[1] || 'AnimeChallenge';
-
-    const data = response.MediaListCollection;
-    const animeList = data.lists.filter(
-      (list) => list.name.toLowerCase() == argAnimeList.toLowerCase()
+    const getAnimeList = getAnimesList.lists.filter(
+      (list) => list.name.toLowerCase() == argAnimeListName.toLowerCase()
     )[0];
-    const entries = animeList.entries;
-    const status = (status) =>
-      entries.filter((entry) => entry.status == status);
+    const getAnimeListEntries = getAnimeList.entries;
+    const getEntriesByStatus = (status) =>
+      getAnimeListEntries.filter((entry) => entry.status == status);
 
-    const animeProgress = status('COMPLETED').length + status('CURRENT').length;
+    const animeProgress =
+      getEntriesByStatus('COMPLETED').length +
+      getEntriesByStatus('CURRENT').length;
 
-    entries.forEach((entry) => (episodesCompleted += entry.progress));
+    getAnimeListEntries.forEach(
+      (entry) => (episodesCompleted += entry.progress)
+    );
 
-    entries.forEach((entry) => (totalEpisodes += entry.media.episodes));
+    getAnimeListEntries.forEach(
+      (entry) => (totalEpisodes += entry.media.episodes)
+    );
 
-    const lastEntries = entries
+    const lastEntries = getAnimeListEntries
       .slice(0, 8)
       .map(
         (entry) =>
@@ -104,37 +132,39 @@ module.exports = {
       )
       .join('\n');
 
-    const upcomingEntries = status('PLANNING')
-      .sort((a, b) =>
-        a.media.title.userPreferred > b.media.title.userPreferred
-          ? 1
-          : b.media.title.userPreferred > a.media.title.userPreferred
-          ? -1
-          : 0
-      )
-      .slice(0, 8)
-      .map(
-        (entry) =>
-          `⌛ **${entry.media.title.userPreferred}** (${entry.media.format})\n${entry.progress}/${entry.media.episodes} - ${entry.media.siteUrl}`
-      )
-      .join('\n');
+    const upcomingEntries =
+      getEntriesByStatus('PLANNING')
+        .sort((a, b) =>
+          a.media.title.userPreferred > b.media.title.userPreferred
+            ? 1
+            : b.media.title.userPreferred > a.media.title.userPreferred
+            ? -1
+            : 0
+        )
+        .slice(0, 8)
+        .map(
+          (entry) =>
+            `⌛ **${entry.media.title.userPreferred}** (${entry.media.format})\n${entry.progress}/${entry.media.episodes} - ${entry.media.siteUrl}`
+        )
+        .join('\n') +
+      `\n**Plus ${getEntriesByStatus('PLANNING').length - 8}...**`;
 
     const reply = new MessageEmbed()
       .setColor('#5865F2')
-      .setAuthor(data.user.name, data.user.avatar.large, data.user.siteUrl)
-      .setTitle(`**${animeList.name}**`)
+      .setAuthor(getUser.name, getUser.avatar.large, getUser.siteUrl)
+      .setTitle(`**${getAnimeList.name}**`)
       .setURL(
-        `${data.user.siteUrl}/animelist/${encodeURIComponent(argAnimeList)}`
+        `${getUser.siteUrl}/animelist/${encodeURIComponent(argAnimeListName)}`
       )
-      .setThumbnail(data.user.avatar.large)
+      .setThumbnail(getUser.avatar.large)
       .addField(
         `**${locale.__('commands.reto.embed.fields.status.name')}**`,
         locale.__('commands.reto.embed.fields.status.value', {
-          Completed: status('COMPLETED').length,
-          Current: status('CURRENT').length,
-          Planning: status('PLANNING').length,
+          Completed: getEntriesByStatus('COMPLETED').length,
+          Current: getEntriesByStatus('CURRENT').length,
+          Planning: getEntriesByStatus('PLANNING').length,
           AnimeProgress: animeProgress,
-          AnimeTotal: entries.length,
+          AnimeTotal: getAnimeListEntries.length,
           EpisodesProgress: episodesCompleted,
           EpisodesTotal: totalEpisodes,
           EpisodesPerCent: ((episodesCompleted / totalEpisodes) * 100).toFixed(
@@ -143,8 +173,9 @@ module.exports = {
         }),
         true
       );
+
     const ddbb = JSON.parse(
-      entries.sort((a, b) =>
+      getAnimeListEntries.sort((a, b) =>
         a.media.title.userPreferred > b.media.title.userPreferred
           ? 1
           : b.media.title.userPreferred > a.media.title.userPreferred
@@ -153,15 +184,7 @@ module.exports = {
       )[0].notes
     );
 
-    if (ddbb == null) {
-      const reply = new MessageEmbed();
-
-      if (message) {
-        message.reply(reply);
-      }
-
-      reply;
-    } else {
+    if (ddbb != null) {
       const dateStarted = ddbb.start;
       const timeToFinish = ddbb.time;
       const dateToFinish = new Date(dateStarted + timeToFinish);
